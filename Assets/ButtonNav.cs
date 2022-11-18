@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ButtonNav : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class ButtonNav : MonoBehaviour
     public float buttonRate;
     float nextButtonTime;
     int buttonIndex = 0;
+    
     void Start()
     {
         nextButtonTime = Time.time + buttonRate;
@@ -52,4 +54,14 @@ public class ButtonNav : MonoBehaviour
     {
         Debug.Log(message);
     }    
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
+    public void PlayGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
 }
