@@ -18,11 +18,5 @@ public class movement : MonoBehaviour
     {
         rb.MovePosition(transform.position + transform.forward * moveSpeed);
         anim.SetBool("walking", true);
-        if (Input.GetButtonDown("Fire1"))
-        {
-           Debug.Log("Rotate");
-            transform.rotation = Quaternion.LookRotation(-transform.right);
-        }
     }
-
 }
