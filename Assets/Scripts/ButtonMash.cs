@@ -10,7 +10,6 @@ public class ButtonMash : MonoBehaviour
     public GameObject Model;
     public Animator anim;
     public Rigidbody rb;
-
     private void OnTriggerEnter(Collider other)
     {
         Player.GetComponent<movement>().enabled = false;
@@ -19,7 +18,6 @@ public class ButtonMash : MonoBehaviour
         canvas.enabled = true;
         anim.SetBool("idling", true);
     }
-
     public void Complete()
     {
        GetComponent<BoxCollider>().enabled = false;

@@ -19,7 +19,6 @@ public class ButtonMashBar : MonoBehaviour
     bool firsttime;
     bool decay = false;
     public float decayTimer = 2.5f;
-
     private void Update()
     {
         float currentOffset = current - minimum;
@@ -50,5 +49,4 @@ public class ButtonMashBar : MonoBehaviour
             Trigger.GetComponent<ButtonMash>().Complete();
         }
     }
-
 }

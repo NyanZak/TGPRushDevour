@@ -4,22 +4,19 @@ using UnityEngine;
 
 public class LightsFlicker : MonoBehaviour
 {
-    public Light light;
+    public new Light light;
     //public AudioSource lightsound;
     public float minTime;
     public float maxTime;
     public float timer;
-
     private void Start()
     {
         timer = Random.Range(minTime, maxTime);
     }
-
     private void Update()
     {
         LightsFlickering();
     }
-
     void LightsFlickering()
     {
         if (timer >0)

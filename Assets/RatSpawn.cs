@@ -10,7 +10,6 @@ public class RatSpawn : MonoBehaviour
     public GameObject Rat;
     public float distance;
     bool isCreated;
-
     private void Update()
     {
         if (Vector3.Distance(Zombie.position, Player.position) <=distance)

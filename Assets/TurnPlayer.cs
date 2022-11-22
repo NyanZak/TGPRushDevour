@@ -37,7 +37,6 @@ public class TurnPlayer : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         turnChecking = true;
-        Debug.Log("Player Entered");
         Player.GetComponent<movement>().enabled = false;
         anim.SetBool("walking", false);
         anim.SetBool("idling", true);
@@ -45,7 +44,7 @@ public class TurnPlayer : MonoBehaviour
     public void TurnLeft()
     {
         Debug.Log("Left");
-        Player.transform.rotation = transform.rotation = Quaternion.LookRotation(-transform.right);
+        Player.transform.rotation = Quaternion.LookRotation(-transform.right);
         Player.GetComponent<movement>().enabled = true;
         anim.SetBool("walking", true);
         anim.SetBool("idling", false);
@@ -53,8 +52,7 @@ public class TurnPlayer : MonoBehaviour
     }
     public void TurnRight()
     {
-        Debug.Log("Right");
-        Player.transform.rotation = transform.rotation = Quaternion.LookRotation(transform.right);
+        Player.transform.rotation = Quaternion.LookRotation(transform.right);
         Player.GetComponent<movement>().enabled = true;
         anim.SetBool("walking", true);
         anim.SetBool("idling", false);
@@ -62,8 +60,7 @@ public class TurnPlayer : MonoBehaviour
     }
      public void TurnForward()
      {
-        Debug.Log("Forward");
-        Player.transform.rotation = transform.rotation = Quaternion.LookRotation(transform.forward);
+        Player.transform.rotation = Quaternion.LookRotation(transform.forward);
         Player.GetComponent<movement>().enabled = true;
         anim.SetBool("walking", true);
         anim.SetBool("idling", false);
@@ -71,8 +68,7 @@ public class TurnPlayer : MonoBehaviour
     }
    public void TurnBack()
    {
-        Debug.Log("Back");
-        Player.transform.rotation = transform.rotation = Quaternion.LookRotation(-transform.forward);
+        Player.transform.rotation = Quaternion.LookRotation(-transform.forward);
         Player.GetComponent<movement>().enabled = true;
         anim.SetBool("walking", true);
         anim.SetBool("idling", false);
