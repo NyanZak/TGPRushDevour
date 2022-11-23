@@ -22,15 +22,12 @@ public class ButtonNav : MonoBehaviour
 
     void Start()
     {
-        //nextButtonTime = Time.time + buttonRate;
         pressing = false;
         foreach (var item in buttons)
         {
             item.enabled = false;
         }
-        //buttons[0].enabled = true;
         TransitionToState(playState);
-            
     }
     void Update()
     {
@@ -42,9 +39,6 @@ public class ButtonNav : MonoBehaviour
         {
             ButtonUp();
         }
-
-        
-        
         currentState.UpdateState(this, buttons[buttonIndex]);
         if (pressing)
         {
@@ -55,13 +49,11 @@ public class ButtonNav : MonoBehaviour
             }
         }
     }
-
     public void ButtonDown()
     {
         pressing = true;
         pressTime = Time.time + longPressTime;
     }
-
     public void ButtonUp()
     {
         pressing = false;
@@ -71,17 +63,14 @@ public class ButtonNav : MonoBehaviour
     {
         Debug.Log(message);
     }    
-
     public void QuitGame()
     {
         Application.Quit();
     }
-
     public void PlayGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
-
     public void TransitionToState(MouseState state)
     {
         nextButtonTime = Time.time + buttonRate;

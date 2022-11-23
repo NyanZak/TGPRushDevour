@@ -9,14 +9,12 @@ public class OptionState : MouseState
     {
         
     }
-
     public override void EnterState(ButtonNav buttonNav, Button button)
     {
         button.enabled = true;
         button.Select();
         Debug.Log("Options");
     }
-
     public override void ExitState(ButtonNav buttonNav, Button button)
     {
         button.enabled = false;
@@ -27,7 +25,6 @@ public class OptionState : MouseState
         }
         buttonNav.TransitionToState(buttonNav.accessState);
     }
-
     public override void ActionState(ButtonNav buttonNav, Button button)
     {
         Debug.Log("Option Action");
