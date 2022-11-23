@@ -26,6 +26,11 @@ public class UIFade : MonoBehaviour
 
     private Color color;
 
+    private void Awake()
+    {
+        element.enabled = true;
+    }
+
     void Start()
     {
         color = element.color;

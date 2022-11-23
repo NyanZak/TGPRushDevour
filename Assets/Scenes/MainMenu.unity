@@ -836,7 +836,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 228451204}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 633b0f69026700d4898067aa69a13f5d, type: 3}
+  m_Script: {fileID: 11500000, guid: 6fd482c00363fa44abc6328febcfb451, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   buttons:
@@ -846,6 +846,9 @@ MonoBehaviour:
   - {fileID: 31087738}
   - {fileID: 1154930940}
   buttonRate: 1
+  longPressTime: 2
+  nextButtonTime: 0
+  buttonIndex: 0
 --- !u!4 &228451206
 Transform:
   m_ObjectHideFlags: 0
@@ -3518,7 +3521,7 @@ GameObject:
   - component: {fileID: 1154930941}
   - component: {fileID: 1154930940}
   m_Layer: 5
-  m_Name: QuitButton (3)
+  m_Name: QuitButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5630,7 +5633,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: ec7f46b425492cb4cbb2960300390a89, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.8
+  m_Volume: 1
   m_Pitch: 0.14
   Loop: 1
   Mute: 0
