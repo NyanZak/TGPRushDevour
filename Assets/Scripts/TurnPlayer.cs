@@ -12,25 +12,18 @@ public class TurnPlayer : MonoBehaviour
     public Canvas canvas;
     public GameObject[] directions;
     int noClick = 0;
-    float pressTimer;
-    bool pressing;
     [SerializeField] private InputActionReference actionReference;
-
     private void OnEnable()
     {
         actionReference.action.Enable();
     }
-
     private void OnDisable()
     {
         actionReference.action.Disable();
     }
-
-
     private void Awake()
     {
         canvas.gameObject.SetActive(false);
-        pressing = false;
         if (!(actionReference.action.interactions.Contains("TapInteraction") && actionReference.action.interactions.Contains("HoldInteraction")))
         {
             return;
@@ -42,13 +35,10 @@ public class TurnPlayer : MonoBehaviour
         {
             if (context.interaction is TapInteraction)
             {
-                Debug.Log("TAP");
                 if (turnChecking == true)
                 {
                         directions[noClick].SetActive(false);
                         noClick++;
-                        Debug.Log("CLICK");
-
                         if ((noClick) >= directions.Length)
                         {
                             noClick = 0;
@@ -56,72 +46,35 @@ public class TurnPlayer : MonoBehaviour
                         directions[noClick].SetActive(true);
                     }
                 }
-        //    else if (context.interaction is HoldInteraction)
+          else if (context.interaction is HoldInteraction)
             {
-                Debug.Log("HOLD");
-
-
-
-
+                if (noClick == 0)
+                {
+                    GetComponent<BoxCollider>().isTrigger = false;
+                    canvas.gameObject.SetActive(false);
+                    TurnLeft();
+                }
+                if (noClick == 1)
+                {
+                    GetComponent<BoxCollider>().isTrigger = false;
+                    canvas.gameObject.SetActive(false);
+                    TurnForward();
+                }
+                if (noClick == 2)
+                {
+                    GetComponent<BoxCollider>().isTrigger = false;
+                    canvas.gameObject.SetActive(false);
+                    TurnRight();
+                }
+                if (noClick == 3)
+                {
+                    GetComponent<BoxCollider>().isTrigger = false;
+                    canvas.gameObject.SetActive(false);
+                    TurnBack();
+                }
             }
         };
-
-
-
-        //if (turnChecking == true)
-        //{
-        //    if (Input.GetButtonDown("Fire1"))
-        //    {
-        //        directions[noClick].SetActive(false);
-        //        noClick++;
-        //        Debug.Log("CLICK");
-
-        //        if ((noClick) >= directions.Length)
-        //        {
-        //            noClick = 0;
-        //        }
-        //        directions[noClick].SetActive(true);
-        //    }
-        //    float fire = Input.GetAxis("Fire1");
-        //    if (fire > 0)
-        //    {
-        //        pressTimer += Time.deltaTime;
-        //        if (pressTimer >= 2)
-        //        {
-        //            Debug.Log("HOLD");
-        //            if (noClick == 0)
-        //            {
-        //                GetComponent<BoxCollider>().enabled = false;
-        //                canvas.gameObject.SetActive(false);
-        //                TurnLeft();
-        //            }
-        //            if (noClick == 1)
-        //            {
-        //                GetComponent<BoxCollider>().enabled = false;
-        //                canvas.gameObject.SetActive(false);
-        //                TurnForward();
-        //            }
-        //            if (noClick == 2)
-        //            {
-        //                GetComponent<BoxCollider>().enabled = false;
-        //                canvas.gameObject.SetActive(false);
-        //                TurnRight();
-        //            }
-        //            if (noClick == 3)
-        //            {
-        //                GetComponent<BoxCollider>().enabled = false;
-        //                canvas.gameObject.SetActive(false);
-        //                TurnBack();
-        //            }
-        //            else
-        //            {
-        //                pressTimer = 0;
-        //            }
-        //        }
-        //    }
-        //}
     }
-
     private void OnTriggerEnter(Collider other)
     {
         turnChecking = true;
@@ -142,6 +95,7 @@ public class TurnPlayer : MonoBehaviour
         anim.SetBool("walking", true);
         anim.SetBool("idling", false);
         turnChecking = false;
+        GetComponent<BoxCollider>().isTrigger = true;
     }
     public void TurnRight()
     {
@@ -150,6 +104,7 @@ public class TurnPlayer : MonoBehaviour
         anim.SetBool("walking", true);
         anim.SetBool("idling", false);
         turnChecking = false;
+        GetComponent<BoxCollider>().isTrigger = true;
     }
     public void TurnForward()
     {
@@ -158,6 +113,7 @@ public class TurnPlayer : MonoBehaviour
         anim.SetBool("walking", true);
         anim.SetBool("idling", false);
         turnChecking = false;
+        GetComponent<BoxCollider>().isTrigger = true;
     }
     public void TurnBack()
     {
@@ -166,5 +122,6 @@ public class TurnPlayer : MonoBehaviour
         anim.SetBool("walking", true);
         anim.SetBool("idling", false);
         turnChecking = false;
+        GetComponent<BoxCollider>().isTrigger = true;
     }
 }
