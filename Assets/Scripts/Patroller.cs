@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class Patroller : MonoBehaviour
 {
     public Transform[] waypoints;
@@ -9,13 +8,11 @@ public class Patroller : MonoBehaviour
     private int waypointIndex;
     private float dist;
     public float delay = 1f;
-
     void Start()
     {
         waypointIndex = 0;
         transform.LookAt(waypoints[waypointIndex].position);
     }
-
     void Update()
     {
         dist = Vector3.Distance(transform.position, waypoints[waypointIndex].position);
@@ -25,12 +22,10 @@ public class Patroller : MonoBehaviour
         }
         Patrol();
     }
-
     void Patrol()
     {
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
     }
-
     void IncreaseIndex()
     {
         waypointIndex++;

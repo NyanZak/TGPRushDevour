@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-
 public enum FadeType
 {
     FadeIn,
@@ -9,28 +8,22 @@ public enum FadeType
     FadeInOut,
     FadeOutIn
 }
-
 public class UIFade : MonoBehaviour
 {
     [Tooltip("The UI element you want to fade")]
     [SerializeField]
     private MaskableGraphic element;
-
     [Tooltip("Fade type")]
     [SerializeField]
     private FadeType fadeType;
-
     [Tooltip("Fade time")]
     [SerializeField]
     private float fadeTime = 1f;
-
     private Color color;
-
     private void Awake()
     {
         element.enabled = true;
     }
-
     void Start()
     {
         color = element.color;

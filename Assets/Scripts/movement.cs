@@ -12,8 +12,7 @@ public class movement : MonoBehaviour
     public float stepCoolDown;
     private float minPitch = 0.90f;
     private float maxPitch = 1.10f;
-   public AudioSource audioSource;
-
+    public AudioSource audioSource;
     private void Start()
     {
         rb = GetComponent<Rigidbody>();

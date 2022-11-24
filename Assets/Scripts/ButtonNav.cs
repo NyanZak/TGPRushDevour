@@ -1,12 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using UnityEditor.Rendering.LookDev;
-
 public class ButtonNav : MonoBehaviour
 {
     public Button[] buttons;
@@ -60,10 +56,6 @@ public class ButtonNav : MonoBehaviour
             }
         };
 }
-    public void ButtonClick(string message)
-    {
-        Debug.Log(message);
-    }
     public void QuitGame()
     {
         Application.Quit();

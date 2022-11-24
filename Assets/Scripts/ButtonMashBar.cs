@@ -4,7 +4,6 @@ using Unity.VisualScripting;
 using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 using UnityEngine.UI;
-
 [ExecuteInEditMode()]
 public class ButtonMashBar : MonoBehaviour
 {
