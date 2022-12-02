@@ -77,6 +77,7 @@ public class TurnPlayer : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+        this.enabled = true;
         turnChecking = true;
         foreach (GameObject obj in directions)
         {
@@ -88,6 +89,11 @@ public class TurnPlayer : MonoBehaviour
         anim.SetBool("idling", true);
         canvas.gameObject.SetActive(true);
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        this.enabled = false;
+    }
     public void TurnLeft()
     {
         Player.transform.rotation = Quaternion.LookRotation(-transform.right);
@@ -95,7 +101,8 @@ public class TurnPlayer : MonoBehaviour
         anim.SetBool("walking", true);
         anim.SetBool("idling", false);
         turnChecking = false;
-        GetComponent<BoxCollider>().isTrigger = true;
+        GetComponent<BoxCollider>().isTrigger = false;
+        StartCoroutine(ResetBox());
     }
     public void TurnRight()
     {
@@ -104,7 +111,7 @@ public class TurnPlayer : MonoBehaviour
         anim.SetBool("walking", true);
         anim.SetBool("idling", false);
         turnChecking = false;
-        GetComponent<BoxCollider>().isTrigger = true;
+        StartCoroutine(ResetBox());
     }
     public void TurnForward()
     {
@@ -113,7 +120,9 @@ public class TurnPlayer : MonoBehaviour
         anim.SetBool("walking", true);
         anim.SetBool("idling", false);
         turnChecking = false;
-        GetComponent<BoxCollider>().isTrigger = true;
+        GetComponent<BoxCollider>().isTrigger = false;
+        GetComponent<BoxCollider>().enabled = false;
+        StartCoroutine(ResetBox());
     }
     public void TurnBack()
     {
@@ -122,6 +131,13 @@ public class TurnPlayer : MonoBehaviour
         anim.SetBool("walking", true);
         anim.SetBool("idling", false);
         turnChecking = false;
-        GetComponent<BoxCollider>().isTrigger = true;
+        StartCoroutine(ResetBox());
+    }
+
+    IEnumerator ResetBox()
+    {
+        Debug.Log("RE-ENABLE BOX COLLIDER");
+        yield return new WaitForSeconds(0.5f);
+        GetComponent<BoxCollider>().enabled = true;
     }
 }
