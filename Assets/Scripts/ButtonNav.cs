@@ -8,11 +8,12 @@ public class ButtonNav : MonoBehaviour
     public Button[] buttons;
     int index = 0;
     [SerializeField] private InputActionReference actionReference;
-    private void OnEnable()
+    public void OnEnable()
     {
         actionReference.action.Enable();
+        Debug.Log(this + ("ENABLE"));
     }
-    private void OnDisable()
+    public void OnDisable()
     {
         actionReference.action.Disable();
     }
@@ -25,17 +26,13 @@ public class ButtonNav : MonoBehaviour
     }
     void Start()
     {
-        foreach (var item in buttons)
-        {
-            item.enabled = false;
-        }
-        buttons[index].enabled = true;
-        buttons[index].Select();
+        ResetNav();
     }
     void Update()
     {
         actionReference.action.performed += context =>
         {
+            print(gameObject.name);
             if (context.interaction is TapInteraction)
             {
                 buttons[index].Select();
@@ -55,7 +52,20 @@ public class ButtonNav : MonoBehaviour
                 buttons[index].enabled = true;
             }
         };
-}
+    }
+    public void ResetNav()
+    {
+        foreach (var item in buttons)
+        {
+            item.enabled = false;
+        }
+        index = 0;
+        buttons[index].enabled = true;
+        buttons[index].Select();
+        actionReference.action.Reset();
+        actionReference.action.Enable();
+        Debug.Log(this + ("START"));
+    }
     public void QuitGame()
     {
         Application.Quit();
@@ -63,5 +73,13 @@ public class ButtonNav : MonoBehaviour
     public void PlayGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+    public void ToggleState()
+    {
+        GetComponent<ButtonNav>().enabled = !GetComponent<ButtonNav>().enabled;
+    }
+    public void ReloadScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

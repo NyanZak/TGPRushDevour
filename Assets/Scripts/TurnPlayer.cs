@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
@@ -33,44 +34,47 @@ public class TurnPlayer : MonoBehaviour
     {
         actionReference.action.performed += context =>
         {
-            if (context.interaction is TapInteraction)
+            if (turnChecking == true)
             {
-                if (turnChecking == true)
+                if (context.interaction is TapInteraction)
                 {
-                        directions[noClick].SetActive(false);
-                        noClick++;
-                        if ((noClick) >= directions.Length)
-                        {
-                            noClick = 0;
-                        }
-                        directions[noClick].SetActive(true);
+                    directions[noClick].SetActive(false);
+                    noClick++;
+
+                    if ((noClick) >= directions.Length)
+                    {
+                        noClick = 0;
                     }
+                    directions[noClick].SetActive(true);
                 }
-          else if (context.interaction is HoldInteraction)
-            {
-                if (noClick == 0)
+                if (context.interaction is HoldInteraction)
                 {
-                    GetComponent<BoxCollider>().isTrigger = false;
-                    canvas.gameObject.SetActive(false);
-                    TurnLeft();
-                }
-                if (noClick == 1)
-                {
-                    GetComponent<BoxCollider>().isTrigger = false;
-                    canvas.gameObject.SetActive(false);
-                    TurnForward();
-                }
-                if (noClick == 2)
-                {
-                    GetComponent<BoxCollider>().isTrigger = false;
-                    canvas.gameObject.SetActive(false);
-                    TurnRight();
-                }
-                if (noClick == 3)
-                {
-                    GetComponent<BoxCollider>().isTrigger = false;
-                    canvas.gameObject.SetActive(false);
-                    TurnBack();
+                    {
+                        if (noClick == 0)
+                        {
+                            GetComponent<BoxCollider>().enabled = false;
+                            canvas.gameObject.SetActive(false);
+                            TurnLeft();
+                        }
+                        if (noClick == 1)
+                        {
+                            GetComponent<BoxCollider>().enabled = false;
+                            canvas.gameObject.SetActive(false);
+                            TurnForward();
+                        }
+                        if (noClick == 2)
+                        {
+                            GetComponent<BoxCollider>().enabled = false;
+                            canvas.gameObject.SetActive(false);
+                            TurnRight();
+                        }
+                        if (noClick == 3)
+                        {
+                            GetComponent<BoxCollider>().enabled = false;
+                            canvas.gameObject.SetActive(false);
+                            TurnBack();
+                        }
+                    }
                 }
             }
         };
@@ -79,6 +83,7 @@ public class TurnPlayer : MonoBehaviour
     {
         this.enabled = true;
         turnChecking = true;
+        GetComponent<BoxCollider>().enabled = false;
         foreach (GameObject obj in directions)
         {
             obj.SetActive(false);
@@ -88,8 +93,8 @@ public class TurnPlayer : MonoBehaviour
         anim.SetBool("walking", false);
         anim.SetBool("idling", true);
         canvas.gameObject.SetActive(true);
+        noClick = 0;
     }
-
     private void OnTriggerExit(Collider other)
     {
         this.enabled = false;
@@ -101,7 +106,6 @@ public class TurnPlayer : MonoBehaviour
         anim.SetBool("walking", true);
         anim.SetBool("idling", false);
         turnChecking = false;
-        GetComponent<BoxCollider>().isTrigger = false;
         StartCoroutine(ResetBox());
     }
     public void TurnRight()
@@ -120,8 +124,6 @@ public class TurnPlayer : MonoBehaviour
         anim.SetBool("walking", true);
         anim.SetBool("idling", false);
         turnChecking = false;
-        GetComponent<BoxCollider>().isTrigger = false;
-        GetComponent<BoxCollider>().enabled = false;
         StartCoroutine(ResetBox());
     }
     public void TurnBack()
@@ -133,10 +135,8 @@ public class TurnPlayer : MonoBehaviour
         turnChecking = false;
         StartCoroutine(ResetBox());
     }
-
     IEnumerator ResetBox()
     {
-        Debug.Log("RE-ENABLE BOX COLLIDER");
         yield return new WaitForSeconds(0.5f);
         GetComponent<BoxCollider>().enabled = true;
     }
