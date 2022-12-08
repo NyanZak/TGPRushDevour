@@ -10,6 +10,8 @@ public class ButtonMashBar : MonoBehaviour
     public int minimum;
     public int maximum;
     public int current;
+    public int increaseAmount;
+    public int decreaseAmount;
     public Image mask;
     public Image fill;
     public Color color;
@@ -29,7 +31,7 @@ public class ButtonMashBar : MonoBehaviour
         if (Input.GetButtonDown("Fire1"))
         {
             decay = true;
-            current += 10;
+            current += increaseAmount;
         }
 
         if (decay)
@@ -40,7 +42,7 @@ public class ButtonMashBar : MonoBehaviour
         if (decayTimer < 0)
         {
             decayTimer = 2.5f;
-            current -= 5;
+            current -= decreaseAmount;
         }
 
         if (current == maximum)

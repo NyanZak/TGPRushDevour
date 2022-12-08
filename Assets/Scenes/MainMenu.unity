@@ -206,7 +206,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 21696081}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1662451433}
+        m_TargetAssemblyTypeName: WeaponSelect, Assembly-CSharp
+        m_MethodName: BottleSelect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &21696081
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1673,10 +1685,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 2076394353}
-        m_TargetAssemblyTypeName: ButtonNav, Assembly-CSharp
-        m_MethodName: ReloadScene
-        m_Mode: 1
+      - m_Target: {fileID: 228451204}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1941,7 +1953,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 471994884}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1662451433}
+        m_TargetAssemblyTypeName: WeaponSelect, Assembly-CSharp
+        m_MethodName: PipeSelect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &471994884
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2124,7 +2148,7 @@ GameObject:
   m_Component:
   - component: {fileID: 633131144}
   - component: {fileID: 633131143}
-  - component: {fileID: 633131145}
+  - component: {fileID: 633131146}
   m_Layer: 0
   m_Name: MMMusic
   m_TagString: Untagged
@@ -2243,7 +2267,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &633131145
+--- !u!114 &633131146
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2252,12 +2276,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 633131141}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f139caf3790583458f1be72db71c91b, type: 3}
+  m_Script: {fileID: 11500000, guid: d22970335b7d5d64eb2349be0656b118, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneNames:
-  - MainMenu
-  instanceName: MainMenuMusic
 --- !u!1 &664183201
 GameObject:
   m_ObjectHideFlags: 0
@@ -2570,7 +2591,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 767833175}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1662451433}
+        m_TargetAssemblyTypeName: WeaponSelect, Assembly-CSharp
+        m_MethodName: NewspaperSelect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &767833175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2829,7 +2862,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 854414914}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1662451433}
+        m_TargetAssemblyTypeName: WeaponSelect, Assembly-CSharp
+        m_MethodName: KeyCardSelect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &854414914
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3439,7 +3484,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 973515654}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1662451433}
+        m_TargetAssemblyTypeName: WeaponSelect, Assembly-CSharp
+        m_MethodName: KeysSelect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &973515654
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3973,10 +4030,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1662451432}
-        m_TargetAssemblyTypeName: ButtonNav, Assembly-CSharp
-        m_MethodName: ReloadScene
-        m_Mode: 1
+      - m_Target: {fileID: 228451204}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -5581,6 +5638,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1662451431}
   - component: {fileID: 1662451432}
+  - component: {fileID: 1662451433}
   m_Layer: 0
   m_Name: ButtoNavWP
   m_TagString: Untagged
@@ -5622,7 +5680,19 @@ MonoBehaviour:
   - {fileID: 471994883}
   - {fileID: 767833174}
   - {fileID: 1113342184}
-  actionReference: {fileID: 8752127328043367006, guid: cbfd9977439d5d648986274e9e29e05c, type: 3}
+  actionReference: {fileID: 6475100525831476386, guid: cbfd9977439d5d648986274e9e29e05c, type: 3}
+--- !u!114 &1662451433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1662451429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da09e6f37b1815e469d79bac21ae84be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1732682459
 GameObject:
   m_ObjectHideFlags: 0
@@ -6705,10 +6775,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 2016562135}
-        m_TargetAssemblyTypeName: ButtonNav, Assembly-CSharp
-        m_MethodName: ReloadScene
-        m_Mode: 1
+      - m_Target: {fileID: 228451204}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -6801,7 +6871,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttons:
   - {fileID: 1983119952}
-  actionReference: {fileID: 8752127328043367006, guid: cbfd9977439d5d648986274e9e29e05c, type: 3}
+  actionReference: {fileID: -5071262001920323173, guid: cbfd9977439d5d648986274e9e29e05c, type: 3}
 --- !u!1001 &2032456821
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7054,7 +7124,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttons:
   - {fileID: 422434626}
-  actionReference: {fileID: 8752127328043367006, guid: cbfd9977439d5d648986274e9e29e05c, type: 3}
+  actionReference: {fileID: 5432215637869310720, guid: cbfd9977439d5d648986274e9e29e05c, type: 3}
 --- !u!1 &2089699288
 GameObject:
   m_ObjectHideFlags: 0
