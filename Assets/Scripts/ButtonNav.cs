@@ -11,7 +11,6 @@ public class ButtonNav : MonoBehaviour
     public void OnEnable()
     {
         actionReference.action.Enable();
-        Debug.Log(this + ("ENABLE"));
     }
     public void OnDisable()
     {
@@ -32,7 +31,6 @@ public class ButtonNav : MonoBehaviour
     {
         actionReference.action.performed += context =>
         {
-            print(gameObject.name);
             if (context.interaction is TapInteraction)
             {
                 buttons[index].Select();
@@ -64,7 +62,6 @@ public class ButtonNav : MonoBehaviour
         buttons[index].Select();
         actionReference.action.Reset();
         actionReference.action.Enable();
-        Debug.Log(this + ("START"));
     }
     public void QuitGame()
     {

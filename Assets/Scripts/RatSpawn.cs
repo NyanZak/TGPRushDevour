@@ -1,11 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 public class RatSpawn : MonoBehaviour
 {
-    public Transform Zombie;
-    public Transform Player;
+    public Transform Zombie, Player;
     public GameObject Rat;
     public float distance;
     bool isCreated;

@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
-public class movement : MonoBehaviour
+public class Movement : MonoBehaviour
 {
     Rigidbody rb;
     public float moveSpeed;
@@ -22,13 +19,12 @@ public class movement : MonoBehaviour
     {
         rb.MovePosition(transform.position + transform.forward * moveSpeed);
         anim.SetBool("walking", true);
-
         stepCoolDown -= Time.deltaTime;
         if (stepCoolDown < 0f)
         {
            // FindObjectOfType<AudioManager>().Play("Footsteps");
            audioSource.pitch = (Random.Range(minPitch, maxPitch));
-            audioSource.Play();
+           audioSource.Play();
            stepCoolDown = stepRate;
         }
     }

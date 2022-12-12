@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 public enum FadeType
@@ -30,45 +29,35 @@ public class UIFade : MonoBehaviour
         switch (fadeType)
         {
             case FadeType.FadeIn:
-                StartCoroutine(FadeIn());
+                FadeIn();
                 break;
             case FadeType.FadeOut:
-                StartCoroutine(FadeOut());
+                FadeOut();
                 break;
             case FadeType.FadeInOut:
-                StartCoroutine(FadeInOut());
+                FadeInOut();
                 break;
             case FadeType.FadeOutIn:
-                StartCoroutine(FadeOutIn());
+                FadeOutIn();
                 break;
         }
     }
-    private IEnumerator FadeOut()
+    private void FadeOut()
     {
-        for (float a = fadeTime; a >= 0; a -= Time.deltaTime)
-        {
-            element.color = new Color(color.r, color.g, color.b, a);
-            yield return null;
-        }
+        LeanTween.alpha(element.rectTransform, 0, fadeTime);
     }
-    private IEnumerator FadeIn()
+    private void FadeIn()
     {
-        for (float a = 0; a <= fadeTime; a += Time.deltaTime)
-        {
-            element.color = new Color(color.r, color.g, color.b, a);
-            yield return null;
-        }
+        LeanTween.alpha(element.rectTransform, 1, fadeTime);
     }
-    private IEnumerator FadeInOut()
+    private void FadeInOut()
     {
-        StartCoroutine(FadeIn());
-        yield return new WaitForSeconds(fadeTime);
-        StartCoroutine(FadeOut());
+        FadeIn();
+        LeanTween.delayedCall(fadeTime, FadeOut);
     }
-    private IEnumerator FadeOutIn()
+    private void FadeOutIn()
     {
-        StartCoroutine(FadeOut());
-        yield return new WaitForSeconds(fadeTime);
-        StartCoroutine(FadeIn());
+        FadeOut();
+        LeanTween.delayedCall(fadeTime, FadeIn);
     }
 }

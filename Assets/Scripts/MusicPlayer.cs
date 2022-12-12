@@ -1,12 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
 public class MusicPlayer : MonoBehaviour
 {
     static Object instance = null;
-
     void Awake()
     {
         if (instance != null)
@@ -20,7 +16,6 @@ public class MusicPlayer : MonoBehaviour
             DontDestroyOnLoad(this.gameObject);
         }
     }
-
     void OnDestroy()
     {
         if (instance == this)
@@ -28,7 +23,6 @@ public class MusicPlayer : MonoBehaviour
             instance = null;
         }
     }
-
     private void Update()
     {
         Scene scene = SceneManager.GetActiveScene();

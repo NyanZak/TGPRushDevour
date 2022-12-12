@@ -1,10 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
-
 public class TurnPlayer : MonoBehaviour
 {
     public GameObject Player;
@@ -12,8 +9,18 @@ public class TurnPlayer : MonoBehaviour
     bool turnChecking = false;
     public Canvas canvas;
     public GameObject[] directions;
-    int noClick = 0;
+    public static int noClick = 0;
     [SerializeField] private InputActionReference actionReference;
+    public HighlightTrigger highlightTrigger;
+
+
+    public enum Direction
+    {
+        Left,
+        Forward,
+        Right,
+        Back
+    }
     private void OnEnable()
     {
         actionReference.action.Enable();
@@ -32,6 +39,7 @@ public class TurnPlayer : MonoBehaviour
     }
     private void Update()
     {
+        Ray ray = highlightTrigger.ray;
         actionReference.action.performed += context =>
         {
             if (turnChecking == true)
@@ -50,29 +58,31 @@ public class TurnPlayer : MonoBehaviour
                 if (context.interaction is HoldInteraction)
                 {
                     {
-                        if (noClick == 0)
+                        switch (noClick)
                         {
-                            GetComponent<BoxCollider>().enabled = false;
-                            canvas.gameObject.SetActive(false);
-                            TurnLeft();
-                        }
-                        if (noClick == 1)
-                        {
-                            GetComponent<BoxCollider>().enabled = false;
-                            canvas.gameObject.SetActive(false);
-                            TurnForward();
-                        }
-                        if (noClick == 2)
-                        {
-                            GetComponent<BoxCollider>().enabled = false;
-                            canvas.gameObject.SetActive(false);
-                            TurnRight();
-                        }
-                        if (noClick == 3)
-                        {
-                            GetComponent<BoxCollider>().enabled = false;
-                            canvas.gameObject.SetActive(false);
-                            TurnBack();
+                            case 0:
+                                GetComponent<BoxCollider>().enabled = false;
+                                canvas.gameObject.SetActive(false);
+                                Turn(Direction.Left);
+                              // ray.direction = Quaternion.AngleAxis(90, Vector3.up) * ray.direction;
+                                break;
+                            case 1:
+                                GetComponent<BoxCollider>().enabled = false;
+                                canvas.gameObject.SetActive(false);
+                                Turn(Direction.Forward);
+                                break;
+                            case 2:
+                                GetComponent<BoxCollider>().enabled = false;
+                                canvas.gameObject.SetActive(false);
+                                Turn(Direction.Right);
+                              // ray.direction = Quaternion.AngleAxis(-90, Vector3.up) * ray.direction;
+                                break;
+                            case 3:
+                                GetComponent<BoxCollider>().enabled = false;
+                                canvas.gameObject.SetActive(false);
+                                Turn(Direction.Back);
+                               // ray.direction = Quaternion.AngleAxis(180, Vector3.up) * ray.direction;
+                                break;
                         }
                     }
                 }
@@ -81,61 +91,56 @@ public class TurnPlayer : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        this.enabled = true;
-        turnChecking = true;
-        GetComponent<BoxCollider>().enabled = false;
-        foreach (GameObject obj in directions)
+        if (other.tag == "Player")
         {
-            obj.SetActive(false);
+            highlightTrigger.raycastEnabled = true;
+            this.enabled = true;
+            turnChecking = true;
+            GetComponent<BoxCollider>().enabled = false;
+            foreach (GameObject obj in directions)
+            {
+                obj.SetActive(false);
+            }
+            directions[0].SetActive(true);
+            Player.GetComponent<Movement>().enabled = false;
+            anim.SetBool("walking", false);
+            anim.SetBool("idling", true);
+            canvas.gameObject.SetActive(true);
+            noClick = 0;
         }
-        directions[0].SetActive(true);
-        Player.GetComponent<movement>().enabled = false;
-        anim.SetBool("walking", false);
-        anim.SetBool("idling", true);
-        canvas.gameObject.SetActive(true);
-        noClick = 0;
     }
     private void OnTriggerExit(Collider other)
     {
-        this.enabled = false;
+        if (other.tag == "Player")
+        {
+            highlightTrigger.raycastEnabled = false;
+            this.enabled = false; 
+        }    
     }
-    public void TurnLeft()
+    public void Turn(Direction direction)
     {
-        Player.transform.rotation = Quaternion.LookRotation(-transform.right);
-        Player.GetComponent<movement>().enabled = true;
+        switch (direction)
+        {
+            case Direction.Left:
+                Player.transform.rotation = Quaternion.LookRotation(-transform.right);
+                break;
+            case Direction.Forward:
+                Player.transform.rotation = Quaternion.LookRotation(transform.forward);
+                break;
+            case Direction.Right:
+                Player.transform.rotation = Quaternion.LookRotation(transform.right);
+                break;
+            case Direction.Back:
+                Player.transform.rotation = Quaternion.LookRotation(-transform.forward);
+                break;
+        }
+        Player.GetComponent<Movement>().enabled = true;
         anim.SetBool("walking", true);
         anim.SetBool("idling", false);
         turnChecking = false;
         StartCoroutine(ResetBox());
     }
-    public void TurnRight()
-    {
-        Player.transform.rotation = Quaternion.LookRotation(transform.right);
-        Player.GetComponent<movement>().enabled = true;
-        anim.SetBool("walking", true);
-        anim.SetBool("idling", false);
-        turnChecking = false;
-        StartCoroutine(ResetBox());
-    }
-    public void TurnForward()
-    {
-        Player.transform.rotation = Quaternion.LookRotation(transform.forward);
-        Player.GetComponent<movement>().enabled = true;
-        anim.SetBool("walking", true);
-        anim.SetBool("idling", false);
-        turnChecking = false;
-        StartCoroutine(ResetBox());
-    }
-    public void TurnBack()
-    {
-        Player.transform.rotation = Quaternion.LookRotation(-transform.forward);
-        Player.GetComponent<movement>().enabled = true;
-        anim.SetBool("walking", true);
-        anim.SetBool("idling", false);
-        turnChecking = false;
-        StartCoroutine(ResetBox());
-    }
-    IEnumerator ResetBox()
+        IEnumerator ResetBox()
     {
         yield return new WaitForSeconds(0.5f);
         GetComponent<BoxCollider>().enabled = true;

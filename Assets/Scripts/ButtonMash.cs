@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 public class ButtonMash : MonoBehaviour
 {
@@ -8,10 +5,9 @@ public class ButtonMash : MonoBehaviour
     public Canvas canvas;
     public GameObject Model;
     public Animator anim;
-    public Rigidbody rb;
     private void OnTriggerEnter(Collider other)
     {
-        Player.GetComponent<movement>().enabled = false;
+        Player.GetComponent<Movement>().enabled = false;
         transform.parent.GetComponent<ButtonMashBar>().enabled = true;
         anim.SetBool("walking", false);
         canvas.enabled = true;
@@ -20,11 +16,11 @@ public class ButtonMash : MonoBehaviour
     public void Complete()
     {
        GetComponent<BoxCollider>().enabled = false;
-       Player.GetComponent<movement>().enabled = true;
+       Player.GetComponent<Movement>().enabled = true;
        transform.parent.GetComponent<ButtonMashBar>().enabled = false;
        canvas.enabled = false;
        Model.SetActive(false);
-        anim.SetBool("walking", true);
-        anim.SetBool("idling", false);
+       anim.SetBool("walking", true);
+       anim.SetBool("idling", false);
     }
 }

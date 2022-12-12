@@ -1,7 +1,5 @@
-using UnityEngine.Audio;
 using System;
 using UnityEngine;
-using Unity.VisualScripting;
 public class AudioManager : MonoBehaviour
 {
     public Sound[] sounds;
@@ -24,6 +22,7 @@ public class AudioManager : MonoBehaviour
             s.source.loop = s.loop;
             s.source.volume = s.volume;
             s.source.pitch = s.pitch;
+            s.source.mute = s.mute;
         }
     }
     public void Play(string name)
@@ -31,10 +30,8 @@ public class AudioManager : MonoBehaviour
         Sound s = Array.Find(sounds, sound => sound.name == name);
         if (s == null)
         {
-            Debug.LogWarning("Sound: " + name + " not found!");
             return;
         }
-   
         s.source.Play();
     }
 }

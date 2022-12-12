@@ -1,60 +1,37 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
-
 public class Weapon : MonoBehaviour
 {
     int totalWeapons = 1;
     public int currentWeaponIndex;
     public GameObject[] weapons;
-    public GameObject weaponHolder;
-    public GameObject currentWeapon;
+    public GameObject weaponHolder, currentWeapon;
     public TMP_Text NameBox;
-    private void Start()
-    {
-        totalWeapons = weaponHolder.transform.childCount;
-        weapons = new GameObject[totalWeapons];
-        for (int i = 0; i < totalWeapons; i++)
-        {
-            weapons[i] = weaponHolder.transform.GetChild(i).gameObject;
-            weapons[i].SetActive(false);
-        }
-    }
+    private Dictionary<string, int> weaponIndices;
     private void Awake()
     {
-        string Weapon = PlayerPrefs.GetString("Weapon");
+        weaponIndices = new Dictionary<string, int>
+    {
+        { "card", 0 },
+        { "keys", 1 },
+        { "bottle", 2 },
+        { "pipe", 3 },
+        { "newspaper", 4 }
+    };
+        totalWeapons = weaponHolder.transform.childCount;
+        weapons = new GameObject[totalWeapons];
+        int index = 0;
+        foreach (Transform child in weaponHolder.transform)
+        {
+            weapons[index] = child.gameObject;
+            weapons[index].SetActive(false);
+            index++;
+        }
+        string Weapon = PlayerPrefs.GetString("currentWeapon");
         NameBox.text = Weapon.ToString();
-        if (Weapon == "Card")
-        {
-            currentWeaponIndex = 0;
-            weapons[currentWeaponIndex].SetActive(true);
-            currentWeapon = weapons[currentWeaponIndex];
-        }
-        if (Weapon == "Bottle")
-        {
-            currentWeaponIndex = 1;
-            weapons[currentWeaponIndex].SetActive(true);
-            currentWeapon = weapons[currentWeaponIndex];
-        }
-        if (Weapon == "Keys")
-        {
-            currentWeaponIndex = 2;
-            weapons[currentWeaponIndex].SetActive(true);
-            currentWeapon = weapons[currentWeaponIndex];
-        }
-        if (Weapon == "Pipe")
-        {
-            currentWeaponIndex = 3;
-            weapons[currentWeaponIndex].SetActive(true);
-            currentWeapon = weapons[currentWeaponIndex];
-        }
-        if (Weapon == "Newspaper")
-        {
-            currentWeaponIndex = 4;
-            weapons[currentWeaponIndex].SetActive(true);
-            currentWeapon = weapons[currentWeaponIndex];
-        }
+        currentWeaponIndex = weaponIndices[Weapon];
+        weapons[currentWeaponIndex].SetActive(true);
+        currentWeapon = weapons[currentWeaponIndex];
     }
 }
