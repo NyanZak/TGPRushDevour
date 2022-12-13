@@ -12,8 +12,7 @@ public class TurnPlayer : MonoBehaviour
     public static int noClick = 0;
     [SerializeField] private InputActionReference actionReference;
     public HighlightTrigger highlightTrigger;
-
-
+    private Vector3 rayDirection;
     public enum Direction
     {
         Left,
@@ -48,11 +47,28 @@ public class TurnPlayer : MonoBehaviour
                 {
                     directions[noClick].SetActive(false);
                     noClick++;
+                    if (noClick == 0)
+                    {
+                        rayDirection = -transform.right; 
+                    }
+                    if (noClick == 1)
+                    {
+                        rayDirection = transform.forward;
+                    }
+                    if (noClick == 2)
+                    {
+                        rayDirection = transform.right;
+                    }
+                    if (noClick == 3)
+                    {
+                        rayDirection = -transform.forward;
+                    }
 
                     if ((noClick) >= directions.Length)
                     {
                         noClick = 0;
                     }
+                    highlightTrigger.raycastDirection = rayDirection;
                     directions[noClick].SetActive(true);
                 }
                 if (context.interaction is HoldInteraction)
@@ -64,7 +80,6 @@ public class TurnPlayer : MonoBehaviour
                                 GetComponent<BoxCollider>().enabled = false;
                                 canvas.gameObject.SetActive(false);
                                 Turn(Direction.Left);
-                              // ray.direction = Quaternion.AngleAxis(90, Vector3.up) * ray.direction;
                                 break;
                             case 1:
                                 GetComponent<BoxCollider>().enabled = false;
@@ -75,13 +90,11 @@ public class TurnPlayer : MonoBehaviour
                                 GetComponent<BoxCollider>().enabled = false;
                                 canvas.gameObject.SetActive(false);
                                 Turn(Direction.Right);
-                              // ray.direction = Quaternion.AngleAxis(-90, Vector3.up) * ray.direction;
                                 break;
                             case 3:
                                 GetComponent<BoxCollider>().enabled = false;
                                 canvas.gameObject.SetActive(false);
                                 Turn(Direction.Back);
-                               // ray.direction = Quaternion.AngleAxis(180, Vector3.up) * ray.direction;
                                 break;
                         }
                     }

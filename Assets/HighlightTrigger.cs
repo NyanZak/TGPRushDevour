@@ -9,16 +9,11 @@ public class HighlightTrigger : MonoBehaviour
     public GameObject player;
     public float rayPositionY, rayPositionZ;
     private GameObject highlightIndicatorInstance;
-    private Vector3 raycastDirection = Vector3.forward;
+    public Vector3 raycastDirection;
     public bool raycastEnabled = true;
     public Ray ray;
-
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-        raycastDirection = Quaternion.AngleAxis(90, Vector3.up) * raycastDirection;
-        }
         Vector3 rayPosition = transform.position;
         rayPosition.y += rayPositionY;
         rayPosition.z += rayPositionZ;

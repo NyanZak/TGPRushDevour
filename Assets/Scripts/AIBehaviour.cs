@@ -14,12 +14,11 @@ public class AIBehaviour : MonoBehaviour
     private Vector3 destination;
     public float reachThreshold;
     Animator aiAnimator;
-
+    private int currentPatrolPointIndex = 0;
     void Start()
     {
         aiAnimator = GetComponent<Animator>();
         destination = patrolPoints[0].position;
-        
     }
     void Update()
     {
@@ -33,27 +32,14 @@ public class AIBehaviour : MonoBehaviour
         }
         else
         {
-            // If the player is out of range, go back to patrolling
             aiAnimator.SetBool("IsMoving", true);
-            for (int i = 0; i < patrolPoints.Length; i++)
-            {
-                if (Vector3.Distance(aiTransform.position, patrolPoints[i].position) <= reachThreshold)
-                {
-                    if (i == patrolPoints.Length - 1)
-                    {
-                        destination = patrolPoints[0].position;
-                        break;
-                    }
-                    else
-                    {
-                        destination = patrolPoints[i + 1].position;
-                        break;
-                    }
-                }
-            }
+            destination = patrolPoints[currentPatrolPointIndex].position;
 
-            // Check if the AI is not moving
-            if (aiTransform.position == destination)
+            if (Vector3.Distance(aiTransform.position, destination) < reachThreshold)
+            {
+                currentPatrolPointIndex = (currentPatrolPointIndex + 1) % patrolPoints.Length;
+            }
+                if (aiTransform.position == destination)
             {
                 aiAnimator.SetBool("IsMoving", false);
             }
@@ -64,5 +50,4 @@ public class AIBehaviour : MonoBehaviour
             }
         }
     }
-
 }
