@@ -1,18 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 public class MovingTrain : MonoBehaviour
 {
+    private GameObject trainInstance;
     public GameObject trainPrefab;
-    GameObject train;
-    public float speed;
-    public Vector3 direction;
+    public float speed = 10f;
+    public float resetDelay = 15f;
     void Start()
-    {
-        train = Instantiate(trainPrefab, Vector3.zero, Quaternion.identity);
+    {       
+        trainInstance = Instantiate(trainPrefab);
+        trainInstance.transform.position = transform.position;
+        Invoke("ResetTrainPosition", resetDelay);
     }
     void Update()
     {
-        train.transform.Translate(direction * speed * Time.deltaTime);
+        trainInstance.transform.position += transform.forward * speed * Time.deltaTime;
+    }
+    void ResetTrainPosition()
+    {
+        trainInstance.transform.position = transform.position;
     }
 }
