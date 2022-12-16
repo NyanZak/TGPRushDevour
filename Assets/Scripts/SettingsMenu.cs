@@ -16,13 +16,15 @@ public class SettingsMenu : MonoBehaviour
     public string[] qualityLevels;
     public string[] modes = { "off", "on" };
     public float[] gameSpeeds;
+    public float[] cameraFOVS;
+    public static float currentCameraFOV = 60f; 
     public static float currentGameSpeed = 1f;
     public GameManager gameManager;
     // public TextMeshProUGUI textComponent;
     // public AudioMixer AudioMixer;
     // public AudioMixerGroup MusicMixer;
     // public AudioMixerGroup SFXMixer;
-    public TextMeshProUGUI resolutionText, fullscreenText, graphicsText, gameSpeedText, colourblindText;
+    public TextMeshProUGUI resolutionText, fullscreenText, graphicsText, fovText, gameSpeedText, colourblindText;
     private void Start()
     {
         resolutions = Screen.resolutions.Select(resolution => new Resolution { width = resolution.width, height = resolution.height }).Distinct().ToArray();
@@ -109,16 +111,20 @@ public class SettingsMenu : MonoBehaviour
     //   }
     //  }
  
-
     public void SetGameSpeed()
     {
         int index = System.Array.IndexOf(gameSpeeds, currentGameSpeed);
         currentGameSpeed = (index + 1 < gameSpeeds.Length) ? gameSpeeds[index + 1] : gameSpeeds[0];
         gameManager.SetTimeScale(currentGameSpeed);
         gameSpeedText.text = currentGameSpeed.ToString();
-
     }
-
+    public void SetCameraFOV()
+    {
+        int index = System.Array.IndexOf(cameraFOVS, currentCameraFOV);
+        currentCameraFOV = (index + 1 < cameraFOVS.Length) ? cameraFOVS[index + 1] : cameraFOVS[0];
+        gameManager.SetCameraFOV(currentCameraFOV);
+        fovText.text = currentCameraFOV.ToString();
+    }
     public void ChangeColourblindMode()
     {
         if (PlayerPrefs.HasKey("colourblind"))

@@ -50,6 +50,29 @@ public class ButtonNav : MonoBehaviour
                 buttons[index].enabled = true;
             }
         };
+
+        ColorBlock colors = buttons[0].colors;
+
+        if (PlayerPrefs.GetString("colourblind") == "off")
+        {
+            colors.highlightedColor = Color.red;
+            colors.selectedColor = Color.green;
+        }
+        else if (PlayerPrefs.GetString("colourblind") == "on")
+        {
+            Color orange = new Color(1f, 0.5f, 0.0f);
+            colors.highlightedColor = Color.blue;
+            colors.selectedColor = orange;
+        }
+        foreach (Button btn in buttons)
+        {
+            btn.colors = colors;
+        }
+
+
+
+
+
     }
     public void ResetNav()
     {

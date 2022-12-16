@@ -1,10 +1,15 @@
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using Cinemachine;
+
 public class GameManager : MonoBehaviour
 {
     public float timeScale = 1.0f;
     public float zombieDetectionRange = 2.0f;
     public string difficultyLevel;
+    public string cameraTag;
+    public float cameraFOV = 60f;
+    CinemachineVirtualCamera virtualCamera;
     public static GameManager instance;
 
     private void Awake()
@@ -18,9 +23,16 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+
+        virtualCamera = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>();
     }
         void Update()
     {
+        if (virtualCamera != null)
+        {
+            virtualCamera.m_Lens.FieldOfView = cameraFOV;
+        }
+
          if (IsInLevel())
         {
              Time.timeScale = timeScale;
@@ -55,5 +67,11 @@ public class GameManager : MonoBehaviour
     {
         timeScale = newTimeScale;
         Time.timeScale = newTimeScale;
+    }
+
+    public void SetCameraFOV(float newCameraFOV)
+    {
+        cameraFOV = newCameraFOV;
+        virtualCamera.m_Lens.FieldOfView = newCameraFOV;
     }
 }
