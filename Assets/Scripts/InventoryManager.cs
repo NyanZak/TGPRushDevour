@@ -18,6 +18,7 @@ public class InventoryManager : MonoBehaviour
             PlayerPrefs.SetString("pipeState", "locked");
             PlayerPrefs.SetString("newspaperState", "locked");
             PlayerPrefs.SetString("CurrentWeapon", "card");
+            PlayerPrefs.SetString("colourblind", "off");
             PlayerPrefs.Save();
         }
     }

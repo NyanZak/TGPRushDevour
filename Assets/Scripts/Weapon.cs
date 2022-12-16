@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
+
 public class Weapon : MonoBehaviour
 {
     int totalWeapons = 1;
@@ -9,8 +11,22 @@ public class Weapon : MonoBehaviour
     public GameObject weaponHolder, currentWeapon;
     public TMP_Text NameBox;
     private Dictionary<string, int> weaponIndices;
+    public Image cardImage, keysImage, bottleUnlocked, pipeUnlocked, newspaperUnlocked, cardCurrent, keysCurrent, bottleCurrent, pipeCurrent, newspaperCurrent;
+
+    string cardState;
+    string keysState;
+    string bottleState;
+    string pipeState;
+    string newspaperState;
+
     private void Awake()
     {
+        cardState = PlayerPrefs.GetString("cardState");
+        keysState = PlayerPrefs.GetString("keysState");
+        bottleState = PlayerPrefs.GetString("bottleState");
+        pipeState = PlayerPrefs.GetString("pipeState");
+        newspaperState = PlayerPrefs.GetString("newspaperState");
+
         weaponIndices = new Dictionary<string, int>
     {
         { "card", 0 },
@@ -33,5 +49,74 @@ public class Weapon : MonoBehaviour
         currentWeaponIndex = weaponIndices[Weapon];
         weapons[currentWeaponIndex].SetActive(true);
         currentWeapon = weapons[currentWeaponIndex];
+}
+
+    private void Update()
+    {
+        if (bottleState == "unlocked")
+        {
+            bottleUnlocked.enabled = true;
+        }
+        else
+        {
+            bottleUnlocked.enabled = false;
+        }
+        if (pipeState == "unlocked")
+        {
+            pipeUnlocked.enabled = true;
+        }
+        else
+        {
+            pipeUnlocked.enabled = false;
+        }
+        if (newspaperState == "unlocked")
+        {
+            newspaperUnlocked.enabled = true;
+        }
+        else
+        {
+            newspaperUnlocked.enabled = false;
+        }
+
+        if (currentWeaponIndex == weaponIndices["card"])
+        {
+            cardCurrent.enabled = true;
+        }
+        else
+        {
+            cardCurrent.enabled = false;
+        }
+        if (currentWeaponIndex == weaponIndices["keys"])
+        {
+            keysCurrent.enabled = true;
+        }
+        else
+        {
+            keysCurrent.enabled = false;
+        }
+        if (currentWeaponIndex == weaponIndices["bottle"])
+        {
+            bottleCurrent.enabled = true;
+        }
+        else
+        {
+            bottleCurrent.enabled = false;
+        }
+        if (currentWeaponIndex == weaponIndices["pipe"])
+        {
+            pipeCurrent.enabled = true;
+        }
+        else
+        {
+            pipeCurrent.enabled = false;
+        }
+        if (currentWeaponIndex == weaponIndices["newspaper"])
+        {
+            newspaperCurrent.enabled = true;
+        }
+        else
+        {
+            newspaperCurrent.enabled = false;
+        }
     }
 }

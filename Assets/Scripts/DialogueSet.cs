@@ -3,8 +3,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
-using UnityEngine.Audio;
-public class DialogueNoiseGate : MonoBehaviour
+public class DialogueSet : MonoBehaviour
 {
     public GameObject Player;
     public Animator anim;
@@ -15,19 +14,6 @@ public class DialogueNoiseGate : MonoBehaviour
     public string[] lines;
     public float textSpeed;
     private int index;
-    public AudioMixer audioMixer;
-    public AudioMixerSnapshot noiseGateSnapshot;
-//Create an AudioMixer in your Unity project and add an AudioMixerGroup for the audio source that contains the background noise.
-
-//Create an AudioMixerSnapshot for the AudioMixerGroup and name it "Noise Gate".
-
-//Create a new AudioMixerSnapshot and name it "Noise Gate Enabled".
-
-//In the "Noise Gate Enabled" snapshot, add an AudioLowPassFilter effect to the AudioMixerGroup and set the cutoffFrequency to 0.
-//This will cause the audio signal to be filtered out below a certain threshold.
-
-//In the "Noise Gate" snapshot, set the AudioMixerGroup's AudioMixerSnapshot to the "Noise Gate Enabled" snapshot.
-//This will enable the noise gate when the "Noise Gate" snapshot is active.
     private void Awake()
     {
         if (!(actionReference.action.interactions.Contains("TapInteraction") && actionReference.action.interactions.Contains("HoldInteraction")))
@@ -48,7 +34,6 @@ public class DialogueNoiseGate : MonoBehaviour
         anim.SetBool("walking", false);
         anim.SetBool("idling", true);
         canvas.gameObject.SetActive(true);
-        noiseGateSnapshot.TransitionTo(0.5f);
     }
     void Update()
     {
@@ -74,14 +59,46 @@ public class DialogueNoiseGate : MonoBehaviour
     void StartDialouge()
     {
         index = 0;
+        string colourblind = PlayerPrefs.GetString("colourblind");
+        if (colourblind == "off")
+        {
+        }
+        else if (colourblind == "on")
+        {
+            for (int i = 0; i < lines.Length; i++)
+            {
+                if (lines[i].Contains("red"))
+                {
+                    lines[i] = lines[i].Replace("red", "orange");
+                }
+                if (lines[i].Contains("green"))
+                {
+                    lines[i] = lines[i].Replace("green", "blue");
+                }
+            }
+        }
         StartCoroutine(TypeLine());
     }
     IEnumerator TypeLine()
     {
+        bool isAddingRichText = false;
+
         foreach (char c in lines[index].ToCharArray())
         {
-            textComponent.text += c;
-            yield return new WaitForSeconds(textSpeed);
+            if (c == '<' || isAddingRichText)
+            {
+                isAddingRichText = true;
+                textComponent.text += c;
+                if (c == '>')
+                {
+                    isAddingRichText = false;
+                }
+            }
+            else
+            {
+                textComponent.text += c;
+                yield return new WaitForSeconds(textSpeed);
+            }
         }
     }
     void NextLine()
@@ -101,8 +118,6 @@ public class DialogueNoiseGate : MonoBehaviour
             anim.SetBool("walking", true);
             anim.SetBool("idling", false);
             dialoguing = false;
-
-            audioMixer.TransitionToSnapshots(new AudioMixerSnapshot[0], new float[0], 0.5f);
         }
     }
 }
