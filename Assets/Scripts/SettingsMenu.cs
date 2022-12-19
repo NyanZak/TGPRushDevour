@@ -17,6 +17,10 @@ public class SettingsMenu : MonoBehaviour
     public string[] modes = { "off", "on" };
     public float[] gameSpeeds;
     public float[] cameraFOVS;
+    public float[] exposures;
+    public float[] contrasts;
+    public static float currentExposure = 0.5f;
+    public static float currentContrast = 0f;
     public static float currentCameraFOV = 60f; 
     public static float currentGameSpeed = 1f;
     public GameManager gameManager;
@@ -24,7 +28,7 @@ public class SettingsMenu : MonoBehaviour
     // public AudioMixer AudioMixer;
     // public AudioMixerGroup MusicMixer;
     // public AudioMixerGroup SFXMixer;
-    public TextMeshProUGUI resolutionText, fullscreenText, graphicsText, fovText, gameSpeedText, colourblindText;
+    public TextMeshProUGUI resolutionText, fullscreenText, graphicsText, brightnessText, contrastText, fovText, gameSpeedText, colourblindText;
     private void Start()
     {
         resolutions = Screen.resolutions.Select(resolution => new Resolution { width = resolution.width, height = resolution.height }).Distinct().ToArray();
@@ -42,6 +46,10 @@ public class SettingsMenu : MonoBehaviour
         graphicsText = GameObject.Find("GraphicsText").GetComponent<TextMeshProUGUI>();
         QualitySettings.SetQualityLevel(6);
         graphicsText.text = qualityLevels[QualitySettings.GetQualityLevel()];
+        fovText.text = currentCameraFOV.ToString();
+        brightnessText.text = currentExposure.ToString();
+        contrastText.text = currentContrast.ToString();
+
         if (!PlayerPrefs.HasKey("colourblind"))
         {
             PlayerPrefs.SetString("colourblind", "off");
@@ -110,7 +118,42 @@ public class SettingsMenu : MonoBehaviour
     //       SetVolume(audioTrack, 100.0f);
     //   }
     //  }
- 
+
+
+
+    public void SetPostExposure()
+    {
+        int index = System.Array.IndexOf(exposures, currentExposure);
+        currentExposure = (index + 1 < exposures.Length) ? exposures[index + 1] : exposures[0];
+        gameManager.SetPostExposure(currentExposure);
+        brightnessText.text = currentExposure.ToString();
+        Debug.Log(currentExposure);
+    }
+
+    public void SetContrast()
+    {
+        int index = System.Array.IndexOf(contrasts, currentContrast);
+        currentContrast = (index + 1 < contrasts.Length) ? contrasts[index + 1] : contrasts[0];
+        gameManager.SetContrast(currentContrast);
+        contrastText.text = currentContrast.ToString();
+        Debug.Log(currentCameraFOV);
+    }
+
+
+
+    public void SetCameraFOV()
+    {
+        int index = System.Array.IndexOf(cameraFOVS, currentCameraFOV);
+        currentCameraFOV = (index + 1 < cameraFOVS.Length) ? cameraFOVS[index + 1] : cameraFOVS[0];
+        gameManager.SetCameraFOV(currentCameraFOV);
+        fovText.text = currentCameraFOV.ToString();
+        Debug.Log(currentCameraFOV);
+    }
+    //SFX
+    //VOICEOVER
+    //MUSIC
+    //DIFFICULTY
+
     public void SetGameSpeed()
     {
         int index = System.Array.IndexOf(gameSpeeds, currentGameSpeed);
@@ -118,13 +161,7 @@ public class SettingsMenu : MonoBehaviour
         gameManager.SetTimeScale(currentGameSpeed);
         gameSpeedText.text = currentGameSpeed.ToString();
     }
-    public void SetCameraFOV()
-    {
-        int index = System.Array.IndexOf(cameraFOVS, currentCameraFOV);
-        currentCameraFOV = (index + 1 < cameraFOVS.Length) ? cameraFOVS[index + 1] : cameraFOVS[0];
-        gameManager.SetCameraFOV(currentCameraFOV);
-        fovText.text = currentCameraFOV.ToString();
-    }
+
     public void ChangeColourblindMode()
     {
         if (PlayerPrefs.HasKey("colourblind"))
@@ -146,6 +183,4 @@ public class SettingsMenu : MonoBehaviour
         }
         colourblindText.text = PlayerPrefs.GetString("colourblind");
     }
-
-    
 } 

@@ -9,7 +9,8 @@ public class GameManager : MonoBehaviour
     public string difficultyLevel;
     public string cameraTag;
     public float cameraFOV = 60f;
-    CinemachineVirtualCamera virtualCamera;
+    public float postExposure = 0.5f;
+    public float contrast = 0f;
     public static GameManager instance;
 
     private void Awake()
@@ -23,15 +24,9 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-
-        virtualCamera = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>();
     }
         void Update()
     {
-        if (virtualCamera != null)
-        {
-            virtualCamera.m_Lens.FieldOfView = cameraFOV;
-        }
 
          if (IsInLevel())
         {
@@ -72,6 +67,16 @@ public class GameManager : MonoBehaviour
     public void SetCameraFOV(float newCameraFOV)
     {
         cameraFOV = newCameraFOV;
-        virtualCamera.m_Lens.FieldOfView = newCameraFOV;
     }
+
+    public void SetPostExposure(float newPostExposure)
+    {
+        postExposure = newPostExposure;
+    }
+
+    public void SetContrast(float newContrast)
+    {
+        contrast = newContrast;
+    }
+
 }

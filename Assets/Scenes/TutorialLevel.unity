@@ -97,8 +97,8 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: b32014d6e2c010c49ba250e05c85c085, type: 2}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 16e97074abc58c84d9fdd1a6d206552a, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -9002,7 +9002,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 1
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -16242,7 +16242,7 @@ MonoBehaviour:
   raycastMask:
     serializedVersion: 2
     m_Bits: 512
-  highlightIndicatorPrefab: {fileID: 2331514875810970502, guid: 94a8992a0fc124841be1b61726593617, type: 3}
+  highlightIndicatorPrefab: {fileID: 8443178058893264737, guid: ed1dd30e7ae649e47ad0741aebb1e93d, type: 3}
   player: {fileID: 1072325235}
   rayPositionY: 0.5
   rayPositionZ: 0.125
@@ -18290,6 +18290,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1546621843}
   - component: {fileID: 1546621844}
+  - component: {fileID: 1546621845}
   m_Layer: 0
   m_Name: CM vcam1
   m_TagString: MainCamera
@@ -18351,6 +18352,19 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 320870317}
+--- !u!114 &1546621845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1546621842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de50f3bc7d768c34a9823d90b7db093c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vcam: {fileID: 1546621844}
 --- !u!1 &1568129273
 GameObject:
   m_ObjectHideFlags: 0
@@ -19373,6 +19387,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1756132547}
   - component: {fileID: 1756132548}
+  - component: {fileID: 1756132549}
   m_Layer: 0
   m_Name: PostProcessing
   m_TagString: Untagged
@@ -19412,6 +19427,19 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   sharedProfile: {fileID: 11400000, guid: d4e57b586ba1afa4eb7deb91bc396a0d, type: 2}
+--- !u!114 &1756132549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1756132545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f38eb867b9b4dc140807b65bd8a2a03c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volume: {fileID: 1756132548}
 --- !u!1 &1759094432
 GameObject:
   m_ObjectHideFlags: 0
@@ -19427,7 +19455,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1759094433
 Transform:
   m_ObjectHideFlags: 0
