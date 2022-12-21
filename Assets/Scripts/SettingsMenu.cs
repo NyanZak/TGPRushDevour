@@ -1,13 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Audio;
-using UnityEngine.UI;
 using System.Linq;
 using TMPro;
-using UnityEngine.SceneManagement;
-using System;
-
+using UnityEngine.Audio;
+using UnityEngine.UI;
 public class SettingsMenu : MonoBehaviour
 {
     Resolution[] resolutions;
@@ -21,14 +16,13 @@ public class SettingsMenu : MonoBehaviour
     public float[] contrasts;
     public static float currentExposure = 0.5f;
     public static float currentContrast = 0f;
-    public static float currentCameraFOV = 60f; 
+    public static float currentCameraFOV = 60.0f; 
     public static float currentGameSpeed = 1f;
     public GameManager gameManager;
-    // public TextMeshProUGUI textComponent;
-    // public AudioMixer AudioMixer;
-    // public AudioMixerGroup MusicMixer;
-    // public AudioMixerGroup SFXMixer;
-    public TextMeshProUGUI resolutionText, fullscreenText, graphicsText, brightnessText, contrastText, fovText, gameSpeedText, colourblindText;
+    public AudioMixer overallMixer;
+    public AudioMixerGroup VoiceoverMixer;
+    public AudioMixerGroup SFXMixer;
+    public TextMeshProUGUI resolutionText, fullscreenText, graphicsText, brightnessText, contrastText, fovText, sfxText, voiceoverText, overallText, gameSpeedText, colourblindText;
     private void Start()
     {
         resolutions = Screen.resolutions.Select(resolution => new Resolution { width = resolution.width, height = resolution.height }).Distinct().ToArray();
@@ -49,7 +43,6 @@ public class SettingsMenu : MonoBehaviour
         fovText.text = currentCameraFOV.ToString();
         brightnessText.text = currentExposure.ToString();
         contrastText.text = currentContrast.ToString();
-
         if (!PlayerPrefs.HasKey("colourblind"))
         {
             PlayerPrefs.SetString("colourblind", "off");
@@ -99,28 +92,45 @@ public class SettingsMenu : MonoBehaviour
         string currentQualityLevelName = qualityLevels[QualitySettings.GetQualityLevel()];
         graphicsText.text = currentQualityLevelName;
     }
-    public void SetVolume(string audioTrack, float volume)
+    public void OverallVolume()
+    {
+        float currentVolume;
+        overallMixer.GetFloat("Volume", out currentVolume);
+        float targetVolume = Mathf.Lerp(currentVolume, currentVolume - 2000, Time.deltaTime); 
+        if (targetVolume < -80)
         {
-           // AudioMixer.SetFloat(audioTrack, volume);
+            targetVolume = 20;
         }
-    // public void DecreaseVolume(string audioTrack)
-    //  {
-    //    float currentVolume;
-    // AudioMixer.GetFloat(audioTrack, out currentVolume);
-    //    if (currentVolume > 0.0f)
-    //     {
-    //          // Decrease the volume by 10%
-    //         float newVolume = Mathf.Max(currentVolume - 10.0f, 0.0f);
-    //         SetVolume(audioTrack, newVolume);
-    //    }
-    //    else
-    //    {
-    //       SetVolume(audioTrack, 100.0f);
-    //   }
-    //  }
-
-
-
+        targetVolume = Mathf.Round(targetVolume);
+        overallMixer.SetFloat("Volume", targetVolume);
+        overallText.text = "" + currentVolume;
+    }
+    public void VoiceoverMixerVolume()
+    {
+        float currentVolume;
+        VoiceoverMixer.audioMixer.GetFloat("VoiceoverVolume", out currentVolume);
+        float targetVolume = Mathf.Lerp(currentVolume, currentVolume - 2000, Time.deltaTime);
+        if (targetVolume < -80)
+        {
+            targetVolume = 20;
+        }
+        targetVolume = Mathf.Round(targetVolume);
+        VoiceoverMixer.audioMixer.SetFloat("VoiceoverVolume", targetVolume);
+        voiceoverText.text = "" + currentVolume;
+    }
+    public void SFXMixerVolume()
+    {
+        float currentVolume;
+        VoiceoverMixer.audioMixer.GetFloat("SFXVolume", out currentVolume);
+        float targetVolume = Mathf.Lerp(currentVolume, currentVolume - 2000, Time.deltaTime);
+        if (targetVolume < -80)
+        {
+            targetVolume = 20;
+        }
+        targetVolume = Mathf.Round(targetVolume);
+        SFXMixer.audioMixer.SetFloat("SFXVolume", targetVolume);
+        sfxText.text = "" + currentVolume;
+    }
     public void SetPostExposure()
     {
         int index = System.Array.IndexOf(exposures, currentExposure);
@@ -129,7 +139,6 @@ public class SettingsMenu : MonoBehaviour
         brightnessText.text = currentExposure.ToString();
         Debug.Log(currentExposure);
     }
-
     public void SetContrast()
     {
         int index = System.Array.IndexOf(contrasts, currentContrast);
@@ -138,9 +147,6 @@ public class SettingsMenu : MonoBehaviour
         contrastText.text = currentContrast.ToString();
         Debug.Log(currentCameraFOV);
     }
-
-
-
     public void SetCameraFOV()
     {
         int index = System.Array.IndexOf(cameraFOVS, currentCameraFOV);
@@ -149,11 +155,6 @@ public class SettingsMenu : MonoBehaviour
         fovText.text = currentCameraFOV.ToString();
         Debug.Log(currentCameraFOV);
     }
-    //SFX
-    //VOICEOVER
-    //MUSIC
-    //DIFFICULTY
-
     public void SetGameSpeed()
     {
         int index = System.Array.IndexOf(gameSpeeds, currentGameSpeed);
@@ -161,7 +162,6 @@ public class SettingsMenu : MonoBehaviour
         gameManager.SetTimeScale(currentGameSpeed);
         gameSpeedText.text = currentGameSpeed.ToString();
     }
-
     public void ChangeColourblindMode()
     {
         if (PlayerPrefs.HasKey("colourblind"))
