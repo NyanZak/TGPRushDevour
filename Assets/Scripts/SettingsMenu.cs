@@ -96,7 +96,7 @@ public class SettingsMenu : MonoBehaviour
     {
         float currentVolume;
         overallMixer.GetFloat("Volume", out currentVolume);
-        float targetVolume = Mathf.Lerp(currentVolume, currentVolume - 2000, Time.deltaTime); 
+        float targetVolume = Mathf.Lerp(currentVolume, currentVolume - 2000, Time.deltaTime);
         if (targetVolume < -80)
         {
             targetVolume = 20;

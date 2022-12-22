@@ -102,6 +102,56 @@
             ]
         },
         {
+            "name": "WeaponMenu",
+            "id": "8dd29b84-461c-4bea-a704-c8dfd8b41e4c",
+            "actions": [
+                {
+                    "name": "TapAndHold",
+                    "type": "Button",
+                    "id": "22634231-afd1-4ef4-85be-2d94c504791a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Hold,Tap",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "f5d1e173-7e76-4725-9b84-d18f4c626261",
+                    "path": "<Joystick>/trigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TapAndHold",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "84e976bd-b9a1-4929-aa34-bdd7defbc942",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TapAndHold",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "29eb2ae3-7e87-425d-9ac5-75e3f6ed70bc",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TapAndHold",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
             "name": "AccessMenu",
             "id": "fe54dc84-aeac-4a73-a4b2-fba5d15875cc",
             "actions": [
@@ -152,13 +202,13 @@
             ]
         },
         {
-            "name": "WeaponMenu",
-            "id": "8dd29b84-461c-4bea-a704-c8dfd8b41e4c",
+            "name": "CreditsMenu",
+            "id": "35166125-5703-43c1-ab75-0ec037285cd9",
             "actions": [
                 {
                     "name": "TapAndHold",
                     "type": "Button",
-                    "id": "22634231-afd1-4ef4-85be-2d94c504791a",
+                    "id": "03f2bb39-2243-4db4-8bfd-a7ef17be9499",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Hold,Tap",
@@ -168,7 +218,7 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "f5d1e173-7e76-4725-9b84-d18f4c626261",
+                    "id": "6f3de5d4-d55f-4cab-bffd-a406e07341c6",
                     "path": "<Joystick>/trigger",
                     "interactions": "",
                     "processors": "",
@@ -179,7 +229,7 @@
                 },
                 {
                     "name": "",
-                    "id": "84e976bd-b9a1-4929-aa34-bdd7defbc942",
+                    "id": "14533b20-782d-4398-b258-dd3cd9a4727b",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
@@ -190,7 +240,7 @@
                 },
                 {
                     "name": "",
-                    "id": "29eb2ae3-7e87-425d-9ac5-75e3f6ed70bc",
+                    "id": "00a2395a-b49d-4da2-bcee-3067688bdfba",
                     "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
