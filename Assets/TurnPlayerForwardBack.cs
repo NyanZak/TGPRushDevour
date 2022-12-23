@@ -14,6 +14,8 @@ public class TurnPlayerForwardBack : MonoBehaviour
     [SerializeField] private InputActionReference actionReference;
     public HighlightTrigger highlightTrigger;
     private Vector3 rayDirection;
+    public GameObject dialogue;
+    public Canvas dialogueCanvas;
     public enum Direction
     {
         Forward,
@@ -75,7 +77,9 @@ public class TurnPlayerForwardBack : MonoBehaviour
                             case 1:
                                 GetComponent<BoxCollider>().enabled = false;
                                 canvas.gameObject.SetActive(false);
-                                Turn(Direction.Back);
+                                dialogue.GetComponent<DialogueSetAutoAudio>().enabled = true;
+                                dialogueCanvas.gameObject.SetActive(true);
+                                StartCoroutine(ResetBox());
                                 break;
                         }
                     }
@@ -90,7 +94,7 @@ public class TurnPlayerForwardBack : MonoBehaviour
             highlightTrigger.raycastEnabled = true;
             this.enabled = true;
             turnChecking = true;
-            GetComponent<BoxCollider>().enabled = false;
+            GetComponent<BoxCollider>().enabled = false;       
             foreach (GameObject obj in directions)
             {
                 obj.SetActive(false);
@@ -109,7 +113,8 @@ public class TurnPlayerForwardBack : MonoBehaviour
         {
             highlightTrigger.raycastEnabled = false;
             this.enabled = false; 
-        }    
+        }
+        dialogueCanvas.gameObject.SetActive(false);
     }
     public void Turn(Direction direction)
     {

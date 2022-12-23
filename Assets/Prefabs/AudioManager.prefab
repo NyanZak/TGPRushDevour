@@ -101,3 +101,11 @@ MonoBehaviour:
     source: {fileID: 0}
     group: {fileID: -7577520173695799586, guid: bf2b69d081d8e684586ff037d24be51a, type: 2}
     mute: 0
+  - name: Lift
+    clip: {fileID: 8300000, guid: d584718225da1d741bd68abc460b6603, type: 3}
+    volume: 0.25
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    group: {fileID: -4886986122906407533, guid: bf2b69d081d8e684586ff037d24be51a, type: 2}
+    mute: 0

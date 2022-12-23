@@ -9,12 +9,16 @@ public class ButtonMash : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Player.GetComponent<Movement>().enabled = false;
-        transform.parent.GetComponent<ButtonMashBar>().enabled = true;
-        anim.SetBool("walking", false);
-        canvas.enabled = true;
-        anim.SetBool("idling", true);
-        dialogue.SetActive(true);
+        if (other.tag == "Player") ;
+        {
+            Player.GetComponent<Movement>().enabled = false;
+            transform.parent.GetComponent<ButtonMashBar>().enabled = true;
+            anim.SetBool("walking", false);
+            canvas.enabled = true;
+            anim.SetBool("idling", true);
+            dialogue.SetActive(true);
+        }
+        
     }
     public void Complete()
     {

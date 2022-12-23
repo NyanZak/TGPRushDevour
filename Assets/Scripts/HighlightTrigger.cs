@@ -13,12 +13,10 @@ public class HighlightTrigger : MonoBehaviour
     public Vector3 raycastDirection;
     public bool raycastEnabled = true;
     public Ray ray;
-
     private void Start()
     {
         highlightIndicatorPrefab.SetActive(false);
     }
-
     private void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.layer == 9)
@@ -26,13 +24,10 @@ public class HighlightTrigger : MonoBehaviour
             highlightIndicatorPrefab.SetActive(true);
         }
     }
-
     private void OnTriggerExit(Collider other)
     {
         highlightIndicatorPrefab.SetActive(false);
     }
-
-
     void Update()
     {
         Vector3 rayPosition = transform.position;

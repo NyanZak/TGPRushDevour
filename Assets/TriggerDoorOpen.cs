@@ -10,7 +10,18 @@ public class TriggerDoorOpen : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            myElevator.Play("ElevatorOpen", 0, 0f);
+            Vector3 collisionNormal = other.ClosestPointOnBounds(transform.position) - transform.position;
+            if (collisionNormal.y > 0)
+            {
+                // Player entered from the top
+                Debug.Log("Player entered from the top");
+            }
+            else
+            {
+                // Player entered from the bottom
+                Debug.Log("Player entered from the bottom");
+                myElevator.Play("ElevatorOpen", 0, 0f);
+            }
         }
     }
 }
