@@ -3,7 +3,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
-public class TurnPlayer : MonoBehaviour
+public class TurnPlayerLeftUpRight : MonoBehaviour
 {
     public GameObject Player;
     public Animator anim;
@@ -19,7 +19,6 @@ public class TurnPlayer : MonoBehaviour
         Left,
         Forward,
         Right,
-        Back
     }
     private void OnEnable()
     {
@@ -40,7 +39,6 @@ public class TurnPlayer : MonoBehaviour
     }
     private void Update()
     {
-      
         actionReference.action.performed += context =>
         {
             if (turnChecking == true)
@@ -61,11 +59,6 @@ public class TurnPlayer : MonoBehaviour
                     {
                         rayDirection = transform.right;
                     }
-                    if (noClick == 3)
-                    {
-                        rayDirection = -transform.forward;
-                    }
-
                     if ((noClick) >= directions.Length)
                     {
                         noClick = 0;
@@ -92,11 +85,6 @@ public class TurnPlayer : MonoBehaviour
                                 GetComponent<BoxCollider>().enabled = false;
                                 canvas.gameObject.SetActive(false);
                                 Turn(Direction.Right);
-                                break;
-                            case 3:
-                                GetComponent<BoxCollider>().enabled = false;
-                                canvas.gameObject.SetActive(false);
-                                Turn(Direction.Back);
                                 break;
                         }
                     }
@@ -144,9 +132,6 @@ public class TurnPlayer : MonoBehaviour
                 break;
             case Direction.Right:
                 Player.transform.rotation = Quaternion.LookRotation(transform.right);
-                break;
-            case Direction.Back:
-                Player.transform.rotation = Quaternion.LookRotation(-transform.forward);
                 break;
         }
         Player.GetComponent<Movement>().enabled = true;
