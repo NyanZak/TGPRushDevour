@@ -9,7 +9,6 @@ public class Weapon : MonoBehaviour
     public int currentWeaponIndex;
     public GameObject[] weapons;
     public GameObject weaponHolder, currentWeapon;
-    public TMP_Text NameBox;
     private Dictionary<string, int> weaponIndices;
     public Image cardImage, keysImage, bottleUnlocked, pipeUnlocked, newspaperUnlocked, cardCurrent, keysCurrent, bottleCurrent, pipeCurrent, newspaperCurrent;
 
@@ -45,7 +44,6 @@ public class Weapon : MonoBehaviour
             index++;
         }
         string Weapon = PlayerPrefs.GetString("currentWeapon");
-        NameBox.text = Weapon.ToString();
         currentWeaponIndex = weaponIndices[Weapon];
         weapons[currentWeaponIndex].SetActive(true);
         currentWeapon = weapons[currentWeaponIndex];

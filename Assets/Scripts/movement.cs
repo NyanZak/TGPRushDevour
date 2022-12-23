@@ -22,7 +22,6 @@ public class Movement : MonoBehaviour
         stepCoolDown -= Time.deltaTime;
         if (stepCoolDown < 0f)
         {
-           // FindObjectOfType<AudioManager>().Play("Footsteps");
            audioSource.pitch = (Random.Range(minPitch, maxPitch));
            audioSource.Play();
            stepCoolDown = stepRate;

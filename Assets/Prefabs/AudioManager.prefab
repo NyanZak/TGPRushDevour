@@ -51,5 +51,53 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
-    group: {fileID: 0}
+    group: {fileID: -4886986122906407533, guid: bf2b69d081d8e684586ff037d24be51a, type: 2}
+    mute: 0
+  - name: Button1
+    clip: {fileID: 8300000, guid: 575df6f5a5885f746bd83e185a51feb4, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    group: {fileID: -4886986122906407533, guid: bf2b69d081d8e684586ff037d24be51a, type: 2}
+    mute: 0
+  - name: Button2
+    clip: {fileID: 8300000, guid: 6f87265e602687e4085c62de3470dde8, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    group: {fileID: -4886986122906407533, guid: bf2b69d081d8e684586ff037d24be51a, type: 2}
+    mute: 0
+  - name: OysterDing
+    clip: {fileID: 8300000, guid: 01962ad2f7d7ca94ba472895195e1662, type: 3}
+    volume: 0.3
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    group: {fileID: -4886986122906407533, guid: bf2b69d081d8e684586ff037d24be51a, type: 2}
+    mute: 0
+  - name: TicketGate
+    clip: {fileID: 8300000, guid: be6746119d549d64cb1a8808227b8371, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    group: {fileID: -4886986122906407533, guid: bf2b69d081d8e684586ff037d24be51a, type: 2}
+    mute: 0
+  - name: Tutorial2
+    clip: {fileID: 8300000, guid: eec580aeaabc3744697b1ddc4799d26c, type: 3}
+    volume: 0.25
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    group: {fileID: -7577520173695799586, guid: bf2b69d081d8e684586ff037d24be51a, type: 2}
+    mute: 0
+  - name: Tutorial3
+    clip: {fileID: 8300000, guid: d1a484ea47bd2bc48ad121e21f008428, type: 3}
+    volume: 0.25
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    group: {fileID: -7577520173695799586, guid: bf2b69d081d8e684586ff037d24be51a, type: 2}
     mute: 0

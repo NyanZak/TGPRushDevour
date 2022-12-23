@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 public class HighlightTrigger : MonoBehaviour
 {
@@ -12,6 +13,26 @@ public class HighlightTrigger : MonoBehaviour
     public Vector3 raycastDirection;
     public bool raycastEnabled = true;
     public Ray ray;
+
+    private void Start()
+    {
+        highlightIndicatorPrefab.SetActive(false);
+    }
+
+    private void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.layer == 9)
+        {
+            highlightIndicatorPrefab.SetActive(true);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        highlightIndicatorPrefab.SetActive(false);
+    }
+
+
     void Update()
     {
         Vector3 rayPosition = transform.position;
@@ -21,7 +42,6 @@ public class HighlightTrigger : MonoBehaviour
         this.ray = ray;
         if (Physics.Raycast(ray, out RaycastHit hit, raycastDistance, raycastMask))
         {
-            Debug.DrawRay(rayPosition, raycastDirection * raycastDistance, Color.blue);
             if (hit.collider.isTrigger)
             {
                 nearestTriggerCollider = hit.collider;

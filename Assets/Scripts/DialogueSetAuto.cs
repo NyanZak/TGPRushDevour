@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections;
 using TMPro;
+using System.Runtime.CompilerServices;
+using System;
 
 public class DialogueSetAuto : MonoBehaviour
 {
@@ -8,18 +10,22 @@ public class DialogueSetAuto : MonoBehaviour
     public float delay = 0.1f;
     private string currentMessage;
     private int currentIndex = 0;
-    //public GameObject interactable;
     public TextMeshProUGUI textComponent;
-    //public AudioSource voiceOverAudioSource;
+    public AudioSource audioSource;
+    public Canvas canvas;
 
-    void Start()
+    private void Start()
     {
+        textComponent.text = string.Empty;
+        canvas.gameObject.SetActive(false);
         currentMessage = messages[currentIndex];
         StartCoroutine(TypeMessage());
+        audioSource.Play();
     }
 
     IEnumerator TypeMessage()
     {
+        canvas.gameObject.SetActive(true);
         string colourblind = PlayerPrefs.GetString("colourblind");
         if (colourblind == "on")
         {
@@ -35,39 +41,42 @@ public class DialogueSetAuto : MonoBehaviour
                 }
             }
         }
-
         bool isAddingRichText = false;
-        textComponent.text = "";
-        for (int i = 0; i < currentMessage.Length; i++)
-        {
-            if (currentMessage[i] == '<' || isAddingRichText)
+            textComponent.text = "";
+            for (int i = 0; i < currentMessage.Length; i++)
             {
-                isAddingRichText = true;
-                textComponent.text += currentMessage[i];
-                if (currentMessage[i] == '>')
+                if (currentMessage[i] == '<' || isAddingRichText)
                 {
-                    isAddingRichText = false;
+                    isAddingRichText = true;
+                    textComponent.text += currentMessage[i];
+                    if (currentMessage[i] == '>')
+                    {
+                        isAddingRichText = false;
+                    }
                 }
+                else
+                {
+                    textComponent.text += currentMessage[i];
+                    yield return new WaitForSeconds(delay);
+                }
+            }
+
+            yield return new WaitForSeconds(1);
+
+            if (currentIndex < messages.Length - 1)
+            {
+                currentIndex++;
+                currentMessage = messages[currentIndex];
+                StartCoroutine(TypeMessage());
+
+
             }
             else
             {
-                textComponent.text += currentMessage[i];
-                yield return new WaitForSeconds(delay);
+                StopCoroutine(TypeMessage());
+                audioSource.Stop();
+
+
             }
         }
-
-        yield return new WaitForSeconds(2);
-
-        if (currentIndex < messages.Length - 1)
-        {
-            currentIndex++;
-            currentMessage = messages[currentIndex];
-            StartCoroutine(TypeMessage());
-        }
-        else
-        {
-            // stop the script
-            StopCoroutine(TypeMessage());
-        }
     }
-}

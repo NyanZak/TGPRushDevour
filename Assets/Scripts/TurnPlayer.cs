@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
@@ -35,10 +36,11 @@ public class TurnPlayer : MonoBehaviour
         {
             return;
         }
+        Ray ray = highlightTrigger.ray;
     }
     private void Update()
     {
-        Ray ray = highlightTrigger.ray;
+      
         actionReference.action.performed += context =>
         {
             if (turnChecking == true)

@@ -1,0 +1,43 @@
+newmtl New_Material_1
+map_Kd ticketbooth.png
+Kd 1 1 1
+d 1
+
+newmtl 1d195b6aa8fe0a3770ed48b8d740fadf
+map_Kd 1d195b6aa8fe0a3770ed48b8d740fadf.jpg
+Kd 1 1 1
+d 1
+
+newmtl New_Material
+map_Kd download (2).png
+Kd 1 1 1
+d 1
+
+newmtl crossing
+map_Kd crossing.png
+Kd 1 1 1
+d 1
+
+newmtl New_Material_2
+map_Kd download (3).png
+Kd 1 1 1
+d 1
+
+newmtl download_(2)
+map_Kd download (2).png
+Kd 1 1 1
+d 1
+
+newmtl New_Material_2_1
+Kd 0.4528302 0.4528302 0.4528302
+d 1
+
+newmtl ProBuilderDefault
+map_Kd GridBox_Default.png
+Kd 1 1 1
+d 1
+
+newmtl New_Material_3
+Kd 0 0 0
+d 1
+

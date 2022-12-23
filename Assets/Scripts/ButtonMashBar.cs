@@ -11,6 +11,7 @@ public class ButtonMashBar : MonoBehaviour
     public GameObject Trigger;
     public float decayTimer = 5f;
     private bool decayStarted = false;
+    public AudioSource audioSource, audioSource2;
     private void Update()
     {
         currentValue = Mathf.Clamp(currentValue, minValue, maxValue);
@@ -29,6 +30,9 @@ public class ButtonMashBar : MonoBehaviour
         if (currentValue == maxValue)
         {
             Trigger.GetComponent<ButtonMash>().Complete();
+            FindObjectOfType<AudioManager>().Play("OysterDing");
+            FindObjectOfType<AudioManager>().Play("TicketGate");
+            currentValue = minValue - 1;
         }
     }
     private IEnumerator Decay()

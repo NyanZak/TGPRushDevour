@@ -14,6 +14,8 @@ public class DialogueSet : MonoBehaviour
     public string[] lines;
     public float textSpeed;
     private int index;
+    public AudioSource audioSource;
+    public AudioClip[] audioClips; 
     private void Awake()
     {
         if (!(actionReference.action.interactions.Contains("TapInteraction") && actionReference.action.interactions.Contains("HoldInteraction")))
@@ -58,6 +60,8 @@ public class DialogueSet : MonoBehaviour
     }
     void StartDialouge()
     {
+        audioSource.clip = audioClips[index];
+        audioSource.PlayDelayed(1);
         index = 0;
         string colourblind = PlayerPrefs.GetString("colourblind");
         if (colourblind == "off")
@@ -105,6 +109,9 @@ public class DialogueSet : MonoBehaviour
     {
         if (index < lines.Length - 1)
         {
+            audioSource.Stop();
+            audioSource.clip = audioClips[index];
+            audioSource.Play();
             index++;
             textComponent.text = string.Empty;
             StartCoroutine(TypeLine());
