@@ -31,6 +31,10 @@ public class ButtonMashBar1 : MonoBehaviour
             Trigger.GetComponent<ButtonMash1>().Complete();
             currentValue = minValue - 1;
         }
+        if (currentValue == minValue)
+        {
+            Trigger.GetComponent<ButtonMash1>().Fail();
+        }
     }
     private IEnumerator Decay()
     {

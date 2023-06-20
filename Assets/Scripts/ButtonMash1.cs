@@ -11,7 +11,7 @@ public class ButtonMash1 : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player") ;
+        if (other.CompareTag("Player"))
         {
             Debug.Log(other);
             Player.GetComponent<Movement>().enabled = false;
@@ -35,6 +35,8 @@ public class ButtonMash1 : MonoBehaviour
 
     public void Fail()
     {
-        SceneManager.LoadScene(sceneName);
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(currentSceneIndex);
+
     }
 }

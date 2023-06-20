@@ -12,7 +12,6 @@ public class TurnPlayerForwardBack : MonoBehaviour
     public GameObject[] directions;
     public static int noClick = 0;
     [SerializeField] private InputActionReference actionReference;
-    public HighlightTrigger highlightTrigger;
     private Vector3 rayDirection;
     public GameObject dialogue;
     public Canvas dialogueCanvas;
@@ -36,7 +35,6 @@ public class TurnPlayerForwardBack : MonoBehaviour
         {
             return;
         }
-        Ray ray = highlightTrigger.ray;
     }
     private void Update()
     {
@@ -61,7 +59,6 @@ public class TurnPlayerForwardBack : MonoBehaviour
                     {
                         noClick = 0;
                     }
-                    highlightTrigger.raycastDirection = rayDirection;
                     directions[noClick].SetActive(true);
                 }
                 if (context.interaction is HoldInteraction)
@@ -91,7 +88,6 @@ public class TurnPlayerForwardBack : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            highlightTrigger.raycastEnabled = true;
             this.enabled = true;
             turnChecking = true;
             GetComponent<BoxCollider>().enabled = false;       
@@ -111,7 +107,6 @@ public class TurnPlayerForwardBack : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            highlightTrigger.raycastEnabled = false;
             this.enabled = false; 
         }
         dialogueCanvas.gameObject.SetActive(false);

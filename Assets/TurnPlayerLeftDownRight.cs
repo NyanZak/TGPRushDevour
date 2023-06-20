@@ -12,7 +12,6 @@ public class TurnPlayerLeftDownRight : MonoBehaviour
     public GameObject[] directions;
     public static int noClick = 0;
     [SerializeField] private InputActionReference actionReference;
-    public HighlightTrigger highlightTrigger;
     private Vector3 rayDirection;
     public enum Direction
     {
@@ -35,7 +34,6 @@ public class TurnPlayerLeftDownRight : MonoBehaviour
         {
             return;
         }
-        Ray ray = highlightTrigger.ray;
     }
     private void Update()
     {
@@ -63,7 +61,6 @@ public class TurnPlayerLeftDownRight : MonoBehaviour
                     {
                         noClick = 0;
                     }
-                    highlightTrigger.raycastDirection = rayDirection;
                     directions[noClick].SetActive(true);
                 }
                 if (context.interaction is HoldInteraction)
@@ -96,7 +93,6 @@ public class TurnPlayerLeftDownRight : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            highlightTrigger.raycastEnabled = true;
             this.enabled = true;
             turnChecking = true;
             GetComponent<BoxCollider>().enabled = false;
@@ -116,7 +112,6 @@ public class TurnPlayerLeftDownRight : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            highlightTrigger.raycastEnabled = false;
             this.enabled = false; 
         }    
     }
@@ -128,7 +123,7 @@ public class TurnPlayerLeftDownRight : MonoBehaviour
                 Player.transform.rotation = Quaternion.LookRotation(-transform.right);
                 break;
             case Direction.Back:
-                Player.transform.rotation = Quaternion.LookRotation(transform.forward);
+                Player.transform.rotation = Quaternion.LookRotation(-transform.forward);
                 break;
             case Direction.Right:
                 Player.transform.rotation = Quaternion.LookRotation(transform.right);

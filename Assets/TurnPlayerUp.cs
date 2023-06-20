@@ -3,7 +3,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
-public class TurnPlayerRightDown : MonoBehaviour
+public class TurnPlayerUp : MonoBehaviour
 {
     public GameObject Player;
     public Animator anim;
@@ -15,8 +15,7 @@ public class TurnPlayerRightDown : MonoBehaviour
     private Vector3 rayDirection;
     public enum Direction
     {
-        Right,
-        Back
+        Forward,
     }
     private void OnEnable()
     {
@@ -46,11 +45,7 @@ public class TurnPlayerRightDown : MonoBehaviour
                     noClick++;
                     if (noClick == 0)
                     {
-                        rayDirection = transform.right;
-                    }
-                    if (noClick == 1)
-                    {
-                        rayDirection = -transform.forward;
+                        rayDirection = transform.forward;
                     }
                     if ((noClick) >= directions.Length)
                     {
@@ -66,12 +61,7 @@ public class TurnPlayerRightDown : MonoBehaviour
                             case 0:
                                 GetComponent<BoxCollider>().enabled = false;
                                 canvas.gameObject.SetActive(false);
-                                Turn(Direction.Right);
-                                break;
-                            case 1:
-                                GetComponent<BoxCollider>().enabled = false;
-                                canvas.gameObject.SetActive(false);
-                                Turn(Direction.Back);
+                                Turn(Direction.Forward);
                                 break;
                         }
                     }
@@ -109,11 +99,8 @@ public class TurnPlayerRightDown : MonoBehaviour
     {
         switch (direction)
         {
-            case Direction.Right:
-                Player.transform.rotation = Quaternion.LookRotation(transform.right);
-                break;
-            case Direction.Back:
-                Player.transform.rotation = Quaternion.LookRotation(-transform.forward);
+            case Direction.Forward:
+                Player.transform.rotation = Quaternion.LookRotation(transform.forward);
                 break;
         }
         Player.GetComponent<Movement>().enabled = true;

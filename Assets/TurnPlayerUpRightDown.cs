@@ -3,7 +3,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
-public class TurnPlayerRightDown : MonoBehaviour
+public class TurnPlayerUpRightDown : MonoBehaviour
 {
     public GameObject Player;
     public Animator anim;
@@ -15,8 +15,9 @@ public class TurnPlayerRightDown : MonoBehaviour
     private Vector3 rayDirection;
     public enum Direction
     {
+        Forward,
         Right,
-        Back
+        Back,
     }
     private void OnEnable()
     {
@@ -46,10 +47,15 @@ public class TurnPlayerRightDown : MonoBehaviour
                     noClick++;
                     if (noClick == 0)
                     {
-                        rayDirection = transform.right;
+                        rayDirection = transform.forward; 
                     }
                     if (noClick == 1)
                     {
+                        rayDirection = transform.right;
+                    }
+                    if (noClick == 2)
+                    {
+                        
                         rayDirection = -transform.forward;
                     }
                     if ((noClick) >= directions.Length)
@@ -66,9 +72,14 @@ public class TurnPlayerRightDown : MonoBehaviour
                             case 0:
                                 GetComponent<BoxCollider>().enabled = false;
                                 canvas.gameObject.SetActive(false);
-                                Turn(Direction.Right);
+                                Turn(Direction.Forward);
                                 break;
                             case 1:
+                                GetComponent<BoxCollider>().enabled = false;
+                                canvas.gameObject.SetActive(false);
+                                Turn(Direction.Right);
+                                break;
+                            case 2:
                                 GetComponent<BoxCollider>().enabled = false;
                                 canvas.gameObject.SetActive(false);
                                 Turn(Direction.Back);
@@ -109,6 +120,9 @@ public class TurnPlayerRightDown : MonoBehaviour
     {
         switch (direction)
         {
+            case Direction.Forward:
+                Player.transform.rotation = Quaternion.LookRotation(transform.forward);
+                break;
             case Direction.Right:
                 Player.transform.rotation = Quaternion.LookRotation(transform.right);
                 break;
