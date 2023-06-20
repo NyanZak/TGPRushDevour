@@ -5,6 +5,8 @@ public class InventoryManager : MonoBehaviour
     {
         InitializeWeaponStates();
         Debug.Log("bottleState: " + PlayerPrefs.GetString("bottleState"));
+        Debug.Log("pipeState: " + PlayerPrefs.GetString("pipeState"));
+        Debug.Log("newspaperState: " + PlayerPrefs.GetString("newspaperState"));
 
     }
     private void InitializeWeaponStates()
@@ -21,10 +23,5 @@ public class InventoryManager : MonoBehaviour
             PlayerPrefs.SetString("colourblind", "off");
             PlayerPrefs.Save();
         }
-    }
-    public void UnlockWeapon(string weapon)
-    {
-        PlayerPrefs.SetString(weapon, "unlocked");
-        PlayerPrefs.Save();
     }
 }

@@ -419,7 +419,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectedImage: {fileID: 916505231}
-  lockedImage: {fileID: 0}
   weapon: bottle
 --- !u!1 &31087736
 GameObject:
@@ -61681,8 +61680,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectedImage: {fileID: 1022452294}
-  lockedImage: {fileID: 0}
-  weapon: Pipe
+  weapon: pipe
 --- !u!114 &472800917 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 259871022016880703, guid: 67fe06d1d86b4fb45811f8d44562f105, type: 3}
@@ -63826,8 +63824,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectedImage: {fileID: 494948903}
-  lockedImage: {fileID: 0}
-  weapon: Newspaper
+  weapon: newspaper
 --- !u!1 &776725416
 GameObject:
   m_ObjectHideFlags: 0
@@ -64588,7 +64585,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectedImage: {fileID: 469931537}
-  lockedImage: {fileID: 0}
   weapon: card
 --- !u!1 &897335613
 GameObject:
@@ -65235,7 +65231,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectedImage: {fileID: 51178803}
-  lockedImage: {fileID: 0}
   weapon: keys
 --- !u!1 &1022452292
 GameObject:

@@ -10,7 +10,7 @@ public class Weapon : MonoBehaviour
     public GameObject[] weapons;
     public GameObject weaponHolder, currentWeapon;
     private Dictionary<string, int> weaponIndices;
-    public Image cardImage, keysImage, bottleUnlocked, pipeUnlocked, newspaperUnlocked, cardCurrent, keysCurrent, bottleCurrent, pipeCurrent, newspaperCurrent;
+    public Image cardImage, keysImage, bottleUnlocked, pipeUnlocked, newspaperUnlocked, cardCurrent, keysCurrent, bottleCurrent, pipeCurrent, newspaperCurrent, bottleLocked, pipeLocked, newspaperLocked;
 
     string cardState;
     string keysState;
@@ -27,13 +27,14 @@ public class Weapon : MonoBehaviour
         newspaperState = PlayerPrefs.GetString("newspaperState");
 
         weaponIndices = new Dictionary<string, int>
-    {
-        { "card", 0 },
-        { "keys", 1 },
-        { "bottle", 2 },
-        { "pipe", 3 },
-        { "newspaper", 4 }
-    };
+        {
+            { "card", 0 },
+            { "keys", 1 },
+            { "bottle", 2 },
+            { "pipe", 3 },
+            { "newspaper", 4 }
+        };
+
         totalWeapons = weaponHolder.transform.childCount;
         weapons = new GameObject[totalWeapons];
         int index = 0;
@@ -43,78 +44,87 @@ public class Weapon : MonoBehaviour
             weapons[index].SetActive(false);
             index++;
         }
-        string Weapon = PlayerPrefs.GetString("currentWeapon");
-        currentWeaponIndex = weaponIndices[Weapon];
+
+        string savedWeapon = PlayerPrefs.GetString("currentWeapon");
+        currentWeaponIndex = weaponIndices[savedWeapon];
         weapons[currentWeaponIndex].SetActive(true);
         currentWeapon = weapons[currentWeaponIndex];
-}
+    }
 
     private void Update()
     {
         if (bottleState == "unlocked")
         {
             bottleUnlocked.enabled = true;
+            bottleLocked.enabled = false;
         }
         else
         {
             bottleUnlocked.enabled = false;
+            bottleLocked.enabled = true;
         }
+
         if (pipeState == "unlocked")
         {
             pipeUnlocked.enabled = true;
+            pipeLocked.enabled = false;
         }
         else
         {
             pipeUnlocked.enabled = false;
+            pipeLocked.enabled = true;
         }
+
         if (newspaperState == "unlocked")
         {
             newspaperUnlocked.enabled = true;
+            newspaperLocked.enabled = false;
         }
         else
         {
             newspaperUnlocked.enabled = false;
+            newspaperLocked.enabled = true;
         }
 
         if (currentWeaponIndex == weaponIndices["card"])
         {
             cardCurrent.enabled = true;
+            keysCurrent.enabled = false;
+            bottleCurrent.enabled = false;
+            pipeCurrent.enabled = false;
+            newspaperCurrent.enabled = false;
         }
-        else
+        else if (currentWeaponIndex == weaponIndices["keys"])
         {
             cardCurrent.enabled = false;
-        }
-        if (currentWeaponIndex == weaponIndices["keys"])
-        {
             keysCurrent.enabled = true;
-        }
-        else
-        {
-            keysCurrent.enabled = false;
-        }
-        if (currentWeaponIndex == weaponIndices["bottle"])
-        {
-            bottleCurrent.enabled = true;
-        }
-        else
-        {
             bottleCurrent.enabled = false;
-        }
-        if (currentWeaponIndex == weaponIndices["pipe"])
-        {
-            pipeCurrent.enabled = true;
-        }
-        else
-        {
             pipeCurrent.enabled = false;
-        }
-        if (currentWeaponIndex == weaponIndices["newspaper"])
-        {
-            newspaperCurrent.enabled = true;
-        }
-        else
-        {
             newspaperCurrent.enabled = false;
+        }
+        else if (currentWeaponIndex == weaponIndices["bottle"])
+        {
+            cardCurrent.enabled = false;
+            keysCurrent.enabled = false;
+            bottleCurrent.enabled = true;
+            pipeCurrent.enabled = false;
+            newspaperCurrent.enabled = false;
+        }
+        else if (currentWeaponIndex == weaponIndices["pipe"])
+        {
+            cardCurrent.enabled = false;
+            keysCurrent.enabled = false;
+            bottleCurrent.enabled = false;
+            pipeCurrent.enabled = true;
+            newspaperCurrent.enabled = false;
+        }
+        else if (currentWeaponIndex == weaponIndices["newspaper"])
+        {
+            cardCurrent.enabled = false;
+            keysCurrent.enabled = false;
+            bottleCurrent.enabled = false;
+            pipeCurrent.enabled = false;
+            newspaperCurrent.enabled = true;
         }
     }
 }
